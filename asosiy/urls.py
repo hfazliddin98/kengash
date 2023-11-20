@@ -5,7 +5,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('haker/', admin.site.urls),
-    # path('', include('ovoz.urls')),
+    path('', include('ovoz.urls')),
     path('users/', include('users.urls')),
 ]
 
