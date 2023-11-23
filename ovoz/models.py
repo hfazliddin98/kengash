@@ -22,5 +22,5 @@ class Statistika(models.Model):
     rozilar = models.IntegerField(default=0)
     qarshilar = models.IntegerField(default=0)
     betaraf = models.IntegerField(default=0)
-    qatnashmagan = models.IntegerField(default=0),
+    qatnashmagan = models.IntegerField(default=0)
     rasm = models.ImageField(upload_to='statistika/')

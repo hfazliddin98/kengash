@@ -34,7 +34,7 @@
 <body>
   {% if user.is_authenticated %}
 
-  {% if user.is_superuser%}
+  {% if user.is_superuser %}
   <!-- Side Navbar -->
   <nav class="side-navbar">
     <div class="side-navbar-inner">
@@ -222,34 +222,34 @@
       </div>
       <!-- Sidebar Navigation Menus-->
       <span class="text-uppercase text-gray-500 text-sm fw-bold letter-spacing-0 mx-lg-2 heading">Asosiy</span>
-      <ul class="list-unstyled">
+      <ul class="list-unstyled">                  
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{% url 'home' %}">
+          <a class="sidebar-link" href="{% url 'home' %}"> 
             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
               <use xlink:href="#real-estate-1"> </use>
             </svg>
-            Home
+            Asosiy 
           </a>
-        </li>
+        </li>                 
 
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{% url 'statistika' %}">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
-              <use xlink:href="#sales-up-1"> </use>
-            </svg>
-            Statistika
-          </a>
-        </li>
-
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="{% url 'malumot' %}">
+          <a class="sidebar-link" href="{% url 'taklif' %}"> 
             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
               <use xlink:href="#portfolio-grid-1"> </use>
             </svg>
-            Ma`lumotlar
+            Takliflar
           </a>
         </li>
 
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'statistika' %}"> 
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+              <use xlink:href="#sales-up-1"> </use>
+            </svg>
+            Statistika 
+          </a>
+        </li>
+      
       </ul>
     </div>
   </nav>
@@ -290,20 +290,7 @@
         <div class="row">
 
           <!-- Count item widget-->
-          <div class="col-xl-3 col-md-4 col-6 gy-4 gy-xl-0">
-            <div class="d-flex">
-              <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
-                <use xlink:href="#user-1"> </use>
-              </svg>
-              <div class="ms-2">
-                <h3 class="h4 text-dark text-uppercase fw-normal">Azolar </h3>
-                <p class="text-gray-500 small">Last 7 days</p>
-                <p class="display-6 mb-0">25</p>
-              </div>
-            </div>
-          </div>
-          <!-- Count item widget-->
-          <div class="col-xl-3 col-md-4 col-6 gy-4 gy-xl-0">
+          <div class="col-xl-4 col-12 gy-4 gy-xl-0">
             <div class="d-flex">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
                 <use xlink:href="#survey-1"> </use>
@@ -311,12 +298,12 @@
               <div class="ms-2">
                 <h3 class="h4 text-dark text-uppercase fw-normal">Barcha takliflar</h3>
                 <p class="text-gray-500 small">Last 5 days</p>
-                <p class="display-6 mb-0">400</p>
+                <p class="display-6 mb-0">{{elonlar_soni}}</p>
               </div>
             </div>
           </div>
           <!-- Count item widget-->
-          <div class="col-xl-3 col-md-4 col-6 gy-4 gy-xl-0">
+          <div class="col-xl-4 col-12 gy-4 gy-xl-0">
             <div class="d-flex">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
                 <use xlink:href="#list-details-1"> </use>
@@ -324,20 +311,20 @@
               <div class="ms-2">
                 <h3 class="h4 text-dark text-uppercase fw-normal">Yangi takliflar</h3>
                 <p class="text-gray-500 small">Last 2 months</p>
-                <p class="display-6 mb-0">342</p>
+                <p class="display-6 mb-0">{{aktivlar_soni}}</p>
               </div>
             </div>
           </div>
           <!-- Count item widget-->
-          <div class="col-xl-3 col-md-4 col-6 gy-4 gy-xl-0">
+          <div class="col-xl-4 col-12 gy-4 gy-xl-0">
             <div class="d-flex">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
-                <use xlink:href="#numbers-1"> </use>
+                <use xlink:href="#numbers-1"></use>
               </svg>
               <div class="ms-2">
                 <h3 class="h4 text-dark text-uppercase fw-normal">Baholangan takliflar</h3>
                 <p class="text-gray-500 small">Last 2 days</p>
-                <p class="display-6 mb-0">123</p>
+                <p class="display-6 mb-0">{{baholangan_soni}}</p>
               </div>
             </div>
           </div>
@@ -345,56 +332,7 @@
         </div>
       </div>
     </section>
-    <!-- Header Section-->
-    <section class="bg-white py-5">
-      <div class="container-fluid">
-        <div class="row d-flex align-items-md-stretch">
-          <!-- To Do List-->
-          <div class="col-lg-3 col-md-6">
-            <div class="card shadow-0">
-              <div class="card-body p-0">
-                <h2 class="h3 fw-normal">To do List</h2>
-                <p class="text-sm text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <form>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="list1">
-                    <label class="form-check-label text-sm" for="list1">Similique sunt in culpa qui officia</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="list2">
-                    <label class="form-check-label text-sm" for="list2">Ed ut perspiciatis unde omnis iste</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="list3">
-                    <label class="form-check-label text-sm" for="list3">At vero eos et accusamus et iusto </label>
-                  </div>
-
-                </form>
-              </div>
-            </div>
-          </div>
-          <!-- Pie Chart-->
-          <div class="col-lg-3 col-md-6">
-            <div class="card shadow-0">
-              <h2 class="h3 fw-normal">Project Beta progress</h2>
-              <p class="text-sm text-muted"> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="pie-chart">
-                <canvas id="pieChart" style="width: 300px; height: 300px; max-width: 100%"> </canvas>
-              </div>
-            </div>
-          </div>
-          <!-- Line Chart -->
-          <div class="col-lg-6 col-md-12">
-            <div class="card shadow-0">
-              <h2 class="h3 fw-normal">Sales marketing report</h2>
-              <p class="text-sm text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor amet
-                officiis</p>
-              <canvas id="lineCahrt"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
 
     <footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2" style="background: #222">
@@ -436,34 +374,25 @@
       </div>
       <!-- Sidebar Navigation Menus-->
       <span class="text-uppercase text-gray-500 text-sm fw-bold letter-spacing-0 mx-lg-2 heading">Asosiy</span>
-      <ul class="list-unstyled">
+      <ul class="list-unstyled">                  
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{% url 'home' %}">
+          <a class="sidebar-link" href="{% url 'home' %}"> 
             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
               <use xlink:href="#real-estate-1"> </use>
             </svg>
-            Home
+            Asosiy 
           </a>
-        </li>
+        </li>                 
 
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{% url 'statistika' %}">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
-              <use xlink:href="#sales-up-1"> </use>
-            </svg>
-            Statistika
-          </a>
-        </li>
-
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="#">
+          <a class="sidebar-link" href="{% url 'taklif_azo' %}"> 
             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
               <use xlink:href="#portfolio-grid-1"> </use>
             </svg>
-            Ma`lumotlar
+            Takliflar
           </a>
-        </li>
-
+        </li>       
+      
       </ul>
     </div>
   </nav>
@@ -503,8 +432,9 @@
       <div class="container-fluid">
         <div class="row">
 
+          
           <!-- Count item widget-->
-          <div class="col-xl-4 col-md-4 col-6 gy-4 gy-xl-0">
+          <div class="col-xl-4 col-12 gy-4 gy-xl-0">
             <div class="d-flex">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
                 <use xlink:href="#survey-1"> </use>
@@ -512,12 +442,12 @@
               <div class="ms-2">
                 <h3 class="h4 text-dark text-uppercase fw-normal">Barcha takliflar</h3>
                 <p class="text-gray-500 small">Last 5 days</p>
-                <p class="display-6 mb-0">400</p>
+                <p class="display-6 mb-0">{{elonlar_soni}}</p>
               </div>
             </div>
           </div>
           <!-- Count item widget-->
-          <div class="col-xl-4 col-md-4 col-6 gy-4 gy-xl-0">
+          <div class="col-xl-4 col-12 gy-4 gy-xl-0">
             <div class="d-flex">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
                 <use xlink:href="#list-details-1"> </use>
@@ -525,20 +455,20 @@
               <div class="ms-2">
                 <h3 class="h4 text-dark text-uppercase fw-normal">Yangi takliflar</h3>
                 <p class="text-gray-500 small">Last 2 months</p>
-                <p class="display-6 mb-0">342</p>
+                <p class="display-6 mb-0">{{aktivlar_soni}}</p>
               </div>
             </div>
           </div>
           <!-- Count item widget-->
-          <div class="col-xl-4 col-md-4 col-6 gy-4 gy-xl-0">
+          <div class="col-xl-4 col-12 gy-4 gy-xl-0">
             <div class="d-flex">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
-                <use xlink:href="#numbers-1"> </use>
+                <use xlink:href="#numbers-1"></use>
               </svg>
               <div class="ms-2">
                 <h3 class="h4 text-dark text-uppercase fw-normal">Baholangan takliflar</h3>
                 <p class="text-gray-500 small">Last 2 days</p>
-                <p class="display-6 mb-0">123</p>
+                <p class="display-6 mb-0">{{baholangan_soni}}</p>
               </div>
             </div>
           </div>
@@ -546,56 +476,8 @@
         </div>
       </div>
     </section>
-    <!-- Header Section-->
-    <section class="bg-white py-5">
-      <div class="container-fluid">
-        <div class="row d-flex align-items-md-stretch">
-          <!-- To Do List-->
-          <div class="col-lg-3 col-md-6">
-            <div class="card shadow-0">
-              <div class="card-body p-0">
-                <h2 class="h3 fw-normal">To do List</h2>
-                <p class="text-sm text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <form>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="list1">
-                    <label class="form-check-label text-sm" for="list1">Similique sunt in culpa qui officia</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="list2">
-                    <label class="form-check-label text-sm" for="list2">Ed ut perspiciatis unde omnis iste</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="list3">
-                    <label class="form-check-label text-sm" for="list3">At vero eos et accusamus et iusto </label>
-                  </div>
-
-                </form>
-              </div>
-            </div>
-          </div>
-          <!-- Pie Chart-->
-          <div class="col-lg-3 col-md-6">
-            <div class="card shadow-0">
-              <h2 class="h3 fw-normal">Project Beta progress</h2>
-              <p class="text-sm text-muted"> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="pie-chart">
-                <canvas id="pieChart" style="width: 300px; height: 300px; max-width: 100%"> </canvas>
-              </div>
-            </div>
-          </div>
-          <!-- Line Chart -->
-          <div class="col-lg-6 col-md-12">
-            <div class="card shadow-0">
-              <h2 class="h3 fw-normal">Sales marketing report</h2>
-              <p class="text-sm text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor amet
-                officiis</p>
-              <canvas id="lineCahrt"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
+    
 
 
     <footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2" style="background: #222">

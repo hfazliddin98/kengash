@@ -1,3 +1,11 @@
 from django.contrib import admin
+from .models import Elon, Statistika
 
-# Register your models here.
+
+@admin.register(Elon)
+class ElonAdmin(admin.ModelAdmin):
+    list_display = ['id']
+
+@admin.register(Statistika)
+class StatistikaAdmin(admin.ModelAdmin):
+    list_display = ['id']

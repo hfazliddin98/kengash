@@ -15,7 +15,7 @@ from .models import Elon, Statistika
 
 
 def pie_chart(request, pk):
-    data = Statistika.objects.all()
+    data = Statistika.objects.filter(id=pk)
     for d in data:
         rozi = int(d.rozilar)
         qarshi = int(d.qarshilar)   
@@ -105,7 +105,7 @@ class StatistikaView(View):
 class TaklifView(View):
     def get(self, request):
         try:
-            data = Elon.objects.all()
+            data = Elon.objects.filter(baza='0')
         except:
             data = ''
 
@@ -115,18 +115,10 @@ class TaklifView(View):
         return render(request, 'ovoz/taklif.html', context)
     
     def post(self, request):
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(request, username=data['username'], password=data['password'])
-            if user:
-                login(request, user)
-                return redirect('/')
-            else:
-                return HttpResponse('Foydalanuvchi yoki parol xato !!!')
+        
         
         context = {
-            'form':form,
+
         }
         return render(request, 'asosiy/home.html', context)
     
@@ -168,11 +160,53 @@ class AzoView(View):
 class YoqishView(View):
     def get(self, request, pk):
         try:
-            pass
+            data = Elon.objects.get(id=pk)
+            data.yoqish = 'True'
+            data.baza = '1'
+            data.save()
+            return redirect('/taklif/')
+        
         except:
-            pass
+            return HttpResponse('<h1>Taklif yoqilmadi!!!</h1>')
+        
+class TakliflarAzoView(View):
+    def get(self, request):
+        try:
+            data = Elon.objects.filter(baza='1')
+        except:
+            data = ''
+
+        context = {
+            'data':data,
+        }
+        return render(request, 'ovoz/taklif_azo.html', context)
+        
+
+class RozilarView(View):
+    def get(self, request, pk):
+
 
         context = {
 
         }
-        return redirect('/taklif')
+        return render(request, 'ovoz/rozilar.html', context)
+    
+class QarshilarView(View):
+    def get(self, request, pk):
+
+
+        context = {
+
+        }
+        return render(request, 'ovoz/qarshilar.html', context)
+    
+class BetaraflarView(View):
+    def get(self, request, pk):
+
+
+        context = {
+
+        }
+        return render(request, 'ovoz/betaraflar.html', context)
+    
+    
