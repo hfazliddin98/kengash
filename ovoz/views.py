@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.views import View
-from users.models import User
+from users.models import User, Davomat
 from users.forms import LoginForm
 from .forms import ElomForm
 from .models import Elon, Statistika
@@ -209,4 +209,34 @@ class BetaraflarView(View):
         }
         return render(request, 'ovoz/betaraflar.html', context)
     
+class DavomatView(View):
+    def get(self, request):
+        try:
+            from datetime import date
+            bugun = date.today()
+            print(bugun)
+            davomat = Davomat.objects.all()
+            for d in davomat:
+                sana = f'{d.sana}'
+                print(sana[:10])
+            data = User.objects.filter(lavozim='azo')
+        except:            
+            data = ''
+        context = {
+            'data':data,
+        }
+        return render(request, 'ovoz/davomat.html', context)
     
+    def post(self, request):
+        form = ElomForm(request.POST)
+        if form.is_valid():
+            new = form.cleaned_data
+            new.user = request.user.id
+            new.save()
+            return redirect('/davomat/')
+
+
+        context = {
+            'form':form,
+        }
+        return render(request, 'ovoz/davomat.html', context)
