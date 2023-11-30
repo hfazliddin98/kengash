@@ -139,9 +139,9 @@
         </header>
 
 
-        
-        
-        
+
+
+
 
 
 
@@ -162,29 +162,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for u in data %}                                    
+                                    {% for u in data %}
+                                    
                                     <tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row">{{u.id}}</th>
                                         <td>{{u.last_name}}</td>
                                         <td>{{u.first_name}}</td>
-                                        <form id="myForm" method="POST">
-                                            {% csrf_token %}
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" name="bor" id="radioButton">
-                                                <label class="form-check-label" for="radioButton">yoqish</label>
-                                              </div>
-                                            
-                                            <br>
-                                            
-                                        </form>
-                                        <td class="text-end"><a href="{% url 'yoqish' u.pk %}" class="btn btn-primary rounded-2">yoqish</a></td>
+                                        <td>
+                                            <form id="myForm" action="{% url 'davomatlar' u.pk %}" method="post">
+                                                {% csrf_token %}
+                                                <!-- Your form fields go here -->
+                                                <div class="form-check form-switch">
+                                                    {% if u.id%}
+                                                        <input class="form-check-input" type="checkbox" role="switch" name="bor" id="myRadioButton" value="some_value" checked>
+                                                        <label class="form-check-label" for="myRadioButton">My Radio Button sss</label>
+                                                    {% else %}
+                                                        <input class="form-check-input" type="checkbox" role="switch" name="bor" id="myRadioButton" value="some_value">
+                                                        <label class="form-check-label" for="myRadioButton">My Radio Button</label>
+                                                    {% endif %}
+                                                </div>
+                                            </form>
+                                        </td>
+
+                                        
                                     </tr>
+                                    
                                     {% endfor %}
                                 </tbody>
                             </table>
 
 
-                            
+
                         </div>
                     </div>
 
@@ -227,13 +235,17 @@
     {% endif %}
 
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        document.getElementById('radioButton').addEventListener('change', function() {
-            // Check if the radio button is checked
-            if (this.checked) {
-                // If checked, submit the form
-                document.getElementById('myForm').submit();
-            }
+        $(document).ready(function () {
+            // Add an event listener to the radio button
+            $('#myRadioButton').change(function () {
+                // Check if the radio button is checked
+                if ($(this).is(':checked')) {
+                    // Submit the form
+                    $('#myForm').submit();
+                }
+            });
         });
     </script>
 

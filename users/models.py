@@ -10,6 +10,6 @@ class User(AbstractUser):
 
 
 class Davomat(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=100)
     bor = models.CharField(max_length=100)
     sana = models.DateTimeField(auto_now_add=True)

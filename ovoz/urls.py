@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from .views import HomeView, StatistikaView, TaklifView, ElonView, AzoView, YoqishView, \
-    TakliflarAzoView, RozilarView, QarshilarView, BetaraflarView, DavomatView
+    TakliflarAzoView, RozilarView, QarshilarView, BetaraflarView, DavomatView, davomatlar
 from .views import pie_chart
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     path('qarshilar/<int:pk>/', QarshilarView.as_view(), name='qarshilar'),
     path('betaraflar/<int:pk>/', BetaraflarView.as_view(), name='betaraflar'),
     path('davomat/', DavomatView.as_view(), name='davomat'),
+    path('davomatlar/<int:pk>/', davomatlar, name='davomatlar')
 ]

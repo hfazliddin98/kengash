@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.views import View
 from users.models import User, Davomat
 from users.forms import LoginForm
-from .forms import ElomForm
+from .forms import ElomForm, DavomatForm
 from .models import Elon, Statistika
 
 
@@ -220,23 +220,51 @@ class DavomatView(View):
                 sana = f'{d.sana}'
                 print(sana[:10])
             data = User.objects.filter(lavozim='azo')
+            for d in data:
+                davomat = Davomat.objects.get(id=d.id)
         except:            
             data = ''
+            davomat = ''
         context = {
             'data':data,
+            'davomat':davomat,
         }
         return render(request, 'ovoz/davomat.html', context)
     
     def post(self, request):
-        form = ElomForm(request.POST)
-        if form.is_valid():
-            new = form.cleaned_data
-            new.user = request.user.id
-            new.save()
-            return redirect('/davomat/')
+        form = DavomatForm(request.POST)        
+        try:
+            if form.is_valid():
+                new = form.cleaned_data
+                new.user = '1'
+                new.save()
+                return redirect('/davomat/')
+            else:
+                return HttpResponse('Bajarildi {user}')
+        except:
+            form = DavomatForm()
 
 
         context = {
             'form':form,
         }
-        return render(request, 'ovoz/davomat.html', context)
+        return render(request, 'ovoz/elon.html', context)
+    
+def davomatlar(request, pk):
+    user = User.objects.get(id=pk)
+    try:
+        data = Davomat.objects.filter(id=pk)
+        if data is not None:
+            Davomat.objects.update(user=user.id, bor='bor')
+            return HttpResponse('Bajarildi {update}')
+        else:
+            Davomat.objects.create(user=user.id, bor='bor')
+            return HttpResponse('Bajarildi {create}')
+        
+        
+            
+    except:
+        return redirect('/davomat/')
+
+
+    
