@@ -1,4 +1,5 @@
 import io
+from datetime import date
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from django.shortcuts import render, redirect
@@ -211,8 +212,7 @@ class BetaraflarView(View):
     
 class DavomatView(View):
     def get(self, request):
-        try:
-            from datetime import date
+        try:            
             bugun = date.today()
             print(bugun)
             davomat = Davomat.objects.all()
@@ -220,8 +220,10 @@ class DavomatView(View):
                 sana = f'{d.sana}'
                 print(sana[:10])
             data = User.objects.filter(lavozim='azo')
-            for d in data:
-                davomat = Davomat.objects.get(id=d.id)
+            for u in data:
+                print(u.id)
+                davomat = Davomat.objects.filter(id=u.id)
+                print(davomat)
         except:            
             data = ''
             davomat = ''
@@ -254,7 +256,7 @@ def davomatlar(request, pk):
     user = User.objects.get(id=pk)
     try:
         data = Davomat.objects.filter(id=pk)
-        if data is not None:
+        if data is not None :
             Davomat.objects.update(user=user.id, bor='bor')
             return HttpResponse('Bajarildi {update}')
         else:
