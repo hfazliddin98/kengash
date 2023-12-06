@@ -214,16 +214,16 @@ class DavomatView(View):
     def get(self, request):
         try:            
             bugun = date.today()
-            print(bugun)
+            # print(bugun)
             davomat = Davomat.objects.all()
             for d in davomat:
                 sana = f'{d.sana}'
-                print(sana[:10])
+                # print(sana[:10])
             data = User.objects.filter(lavozim='azo')
             for u in data:
-                print(u.id)
+                # print(u.id)
                 davomat = Davomat.objects.filter(id=u.id)
-                print(davomat)
+                # print(davomat)
         except:            
             data = ''
             davomat = ''
@@ -233,35 +233,29 @@ class DavomatView(View):
         }
         return render(request, 'ovoz/davomat.html', context)
     
-    def post(self, request):
-        form = DavomatForm(request.POST)        
-        try:
-            if form.is_valid():
-                new = form.cleaned_data
-                new.user = '1'
-                new.save()
-                return redirect('/davomat/')
-            else:
-                return HttpResponse('Bajarildi {user}')
-        except:
-            form = DavomatForm()
-
-
-        context = {
-            'form':form,
-        }
-        return render(request, 'ovoz/elon.html', context)
+    
     
 def davomatlar(request, pk):
     user = User.objects.get(id=pk)
+
     try:
-        data = Davomat.objects.filter(id=pk)
-        if data is not None :
-            Davomat.objects.update(user=user.id, bor='bor')
-            return HttpResponse('Bajarildi {update}')
-        else:
-            Davomat.objects.create(user=user.id, bor='bor')
-            return HttpResponse('Bajarildi {create}')
+        # return HttpResponse(f"{user.id}")
+        data = Davomat.objects.all()
+        for d in data: 
+            if int(d.user) == int(user.id):
+                print('MOSLAR')
+            else:
+                print('AAA')
+
+            print(f'user {user.id} = davomat {d.user}')           
+        return HttpResponse(f'son')
+
+        # if data is not None :
+        #     Davomat.objects.update(user=user.id, bor='bor')
+        #     return HttpResponse('Bajarildi {update}')
+        # else:
+        #     Davomat.objects.create(user=user.id, bor='bor')
+        #     return HttpResponse('Bajarildi {create}')
         
         
             

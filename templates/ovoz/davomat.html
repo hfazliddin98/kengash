@@ -12,7 +12,7 @@
     <!-- Google fonts - Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <!-- Choices CSS-->
-    <link rel="stylesheet" href="{% static '/vendor/choices.js/public/assets/styles/choices.min.css">
+    <link rel="stylesheet" href="{% static '/vendor/choices.js/public/assets/styles/choices.min.css' %}">
     <!-- Custom Scrollbar-->
     <link rel="stylesheet" href="{% static '/vendor/overlayscrollbars/css/OverlayScrollbars.min.css' %}">
     <!-- theme stylesheet-->
@@ -126,7 +126,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 py-3">
                         <li class="breadcrumb-item"><a class="fw-light" href="{% url 'home' %}">Home</a></li>
-                        <li class="breadcrumb-item active fw-light" aria-current="page">Taklif </li>
+                        <li class="breadcrumb-item active fw-light" aria-current="page">Davomat </li>
                     </ol>
                 </nav>
             </div>
@@ -163,28 +163,16 @@
                                 </thead>
                                 <tbody>
                                     {% for u in data %}
-                                    
+
                                     <tr>
+                                        
                                         <th scope="row">{{u.id}}</th>
                                         <td>{{u.last_name}}</td>
                                         <td>{{u.first_name}}</td>
                                         <td>
-                                            <form id="myForm" action="{% url 'davomatlar' u.pk %}" method="post">
-                                                {% csrf_token %}
-                                                <!-- Your form fields go here -->
-                                                <div class="form-check form-switch">
-                                                    {% if davomat %}
-                                                        <input class="form-check-input" type="checkbox" role="switch" name="bor" id="myRadioButton" value="some_value" checked>
-                                                        <label class="form-check-label" for="myRadioButton">My Radio Button sss</label>
-                                                    {% else %}
-                                                        <input class="form-check-input" type="checkbox" role="switch" name="bor" id="myRadioButton" value="some_value">
-                                                        <label class="form-check-label" for="myRadioButton">My Radio Button</label>
-                                                    {% endif %}
-                                                </div>
-                                            </form>
+                                            <a href="{% url 'davomatlar' u.pk %}">yoqish</a>
                                         </td>
 
-                                        
                                     </tr>
                                     
                                     {% endfor %}
@@ -236,18 +224,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Add an event listener to the radio button
-            $('#myRadioButton').change(function () {
-                // Check if the radio button is checked
-                if ($(this).is(':checked')) {
-                    // Submit the form
-                    $('#myForm').submit();
-                }
-            });
-        });
-    </script>
+    
 
     <!-- JavaScript files-->
     <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -255,7 +232,7 @@
     <script src="{% static '/vendor/just-validate/js/just-validate.min.js' %}"></script>
     <script src="{% static '/vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
     <script src="{% static '/vendor/overlayscrollbars/js/OverlayScrollbars.min.js' %}"></script>
-    <script src="{% static '/js/charts-custom.js"></script>
+    <script src="{% static '/js/charts-custom.js' %}"></script>
     <!-- Main File-->
     <script src="{% static '/js/front.js' %}"></script>
     <script>
