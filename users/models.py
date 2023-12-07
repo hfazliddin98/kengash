@@ -13,5 +13,4 @@ class Davomat(models.Model):
     user_id = models.CharField(max_length=100)
     familya = models.CharField(max_length=100)
     ism = models.CharField(max_length=100)
-    bor = models.CharField(max_length=100)
-    sana = models.DateTimeField(auto_now_add=True)
+    sana = models.CharField(max_length=100)

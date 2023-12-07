@@ -138,20 +138,12 @@
             </div>
         </header>
 
-
-
-
-
-
-
-
         <section>
             <div class="container-fluid">
                 <div class="row">
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="card">
-
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -163,29 +155,50 @@
                                 </thead>
                                 <tbody>
                                     {% for u in data %}
-
-                                    <tr>
-                                        
+                                    <tr>                                        
                                         <th scope="row">{{u.id}}</th>
                                         <td>{{u.last_name}}</td>
                                         <td>{{u.first_name}}</td>
                                         <td>
                                             <a href="{% url 'davomatlar' u.pk %}">yoqish</a>
                                         </td>
-
-                                    </tr>
-                                    
+                                    </tr>                                    
                                     {% endfor %}
                                 </tbody>
                             </table>
-
-
-
                         </div>
                     </div>
 
-
-
+                    <div class="col-lg-6">
+                        <div class="bg-white">
+                            Borlar
+                            <hr>
+                        </div>
+                        <div class="card">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Familya</th>
+                                        <th scope="col">Ism</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for u in data %}
+                                    <tr>                                        
+                                        <th scope="row">{{u.id}}</th>
+                                        <td>{{u.last_name}}</td>
+                                        <td>{{u.first_name}}</td>
+                                        <td>
+                                            <a href="{% url 'davomatlar' u.pk %}">yoqish</a>
+                                        </td>
+                                    </tr>                                    
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                 </div>
             </div>

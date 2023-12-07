@@ -11,4 +11,4 @@ class ElomForm(forms.ModelForm):
 class DavomatForm(forms.ModelForm):
     class Meta:
         model = Davomat
-        fields = ['user', 'bor']
+        fields = ['user_id', 'familya', 'ism']
