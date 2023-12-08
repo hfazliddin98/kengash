@@ -70,6 +70,15 @@
         </li>
 
         <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'davomat' %}">
+              <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                  <use xlink:href="#quality-1"> </use>
+              </svg>
+              Davomat
+          </a>
+        </li>
+
+        <li class="sidebar-item">
           <a class="sidebar-link" href="{% url 'taklif' %}">
             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
               <use xlink:href="#portfolio-grid-1"> </use>
@@ -135,25 +144,29 @@
     </div>
     <!-- Page Header-->
     <header class="py-4">
-      <div class="container-fluid py-2">
-        <h1 class="h2 fw-normal mb-0 text-center">Ma`lumotlarni kiritish</h1>
+      <div class="container-fluid py-2 d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="h2 fw-normal mb-0 text-center">Kengashga taklif kiritish</h1>
+        </div>
+        <div>
+          <a href="{% url 'elon' %}" class="btn btn-primary rounded-2">Taklif qo`shish</a>
+        </div>
       </div>
     </header>
 
     <section>
-      <div class="container-fluid">
-        <div class="row">
+      <div class="container-fluid">     
 
+        <div class="row">
           <div class="col-lg-12">
-            <div class="card">
-              <div class="card-header border-bottom d-flex justify-content-between align-items-center">
-                <div class="h4 m-0">
-                  Kengashga taklif kiritish
+            <div class="card">             
+
+              <header class="py-4">
+                <div class="container-fluid py-2">
+                  <h1 class="h2 fw-normal mb-0 text-center">Barcha takliflar</h1>
                 </div>
-                <div class="">
-                  <a href="{% url 'elon' %}" class="btn btn-primary rounded-2">Taklif qo`shish</a>
-                </div>
-              </div>
+              </header>
+              
               <ol class="list-group">
                 {% for t in data %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -166,11 +179,32 @@
               </ol>
             </div>
           </div>
-
-
-
-
         </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">             
+
+              <header class="py-4">
+                <div class="container-fluid py-2">
+                  <h1 class="h2 fw-normal mb-0 text-center">Kengashga qoyilgan takliflar</h1>
+                </div>
+              </header>
+              
+              <ol class="list-group">
+                {% for b in baholangan %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold">{{b.vaqt}}:00 {{b.name}} {{b.nomzod}}</div>
+                  </div>
+                  <a href="{% url 'yoqish' b.pk %}" class="btn btn-primary rounded-2">yoqish</a>
+                </li>
+                {% endfor %}
+              </ol>
+            </div>
+          </div>
+        </div>        
+
       </div>
     </section>
 

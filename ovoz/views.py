@@ -2,7 +2,7 @@ import io
 from datetime import date
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.views import View
@@ -15,7 +15,7 @@ from .models import Elon, Statistika
 
 
 
-def pie_chart(request, pk):
+def diyogramma(request, pk):
     data = Statistika.objects.filter(id=pk)
     for d in data:
         rozi = int(d.rozilar)
@@ -49,10 +49,10 @@ class HomeView(View):
             aktivlar_soni = aktivlar.__len__
             baholangan = Elon.objects.filter(yoqish=True)
             baholangan_soni = baholangan.__len__
-
+            
            
         except:
-            azo_soni = 'o'
+            azo_soni = '0'
             elonlar_soni = '0'
             aktivlar_soni = '0'
             baholangan_soni = '0'
@@ -107,11 +107,14 @@ class TaklifView(View):
     def get(self, request):
         try:
             data = Elon.objects.filter(baza='0')
+            baholangan = Elon.objects.filter(yoqish=True)
         except:
             data = ''
+            baholangan = ''
 
         context = {
             'data':data,
+            'baholangan':baholangan,
         }
         return render(request, 'ovoz/taklif.html', context)
     
@@ -138,7 +141,7 @@ class ElonView(View):
         form = ElomForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/taklif/')
 
 
         context = {
@@ -186,81 +189,91 @@ class TakliflarAzoView(View):
 class RozilarView(View):
     def get(self, request, pk):
 
-
-        context = {
-
-        }
-        return render(request, 'ovoz/rozilar.html', context)
+        return redirect("/taklif_azo/")
+        
     
 class QarshilarView(View):
     def get(self, request, pk):
 
 
-        context = {
+        return redirect("/taklif_azo/")
 
-        }
-        return render(request, 'ovoz/qarshilar.html', context)
     
 class BetaraflarView(View):
     def get(self, request, pk):
 
 
-        context = {
-
-        }
-        return render(request, 'ovoz/betaraflar.html', context)
+        return redirect("/taklif_azo/")
     
+
 class DavomatView(View):
     def get(self, request):
-        try:            
-            bugun = date.today()
-            # print(bugun)
-            davomat = Davomat.objects.all()
-            for d in davomat:
-                sana = f'{d.sana}'
-                # print(sana[:10])
-            data = User.objects.filter(lavozim='azo')
-            for u in data:
-                # print(u.id)
-                davomat = Davomat.objects.filter(id=u.id)
-                # print(davomat)
+        try:   
+            borlar = Davomat.objects.filter(aktiv=True)
+            yoqlar = Davomat.objects.filter(aktiv=False)            
+            
         except:            
-            data = ''
-            davomat = ''
+            borlar = ''
+            yoqlar = ''
         context = {
-            'data':data,
-            'davomat':davomat,
+            'borlar':borlar,
+            'yoqlar':yoqlar,
         }
         return render(request, 'ovoz/davomat.html', context)
     
     
     
-def davomatlar(request, pk):
-    user = User.objects.get(id=pk)
-
-    try:
-        # return HttpResponse(f"{user.id}")
-        data = Davomat.objects.all()
-        for d in data: 
-            if int(d.user) == int(user.id):
-                print('MOSLAR')
-            else:
-                print('AAA')
-
-            print(f'user {user.id} = davomat {d.user}')           
-        return HttpResponse(f'son')
-
-        # if data is not None :
-        #     Davomat.objects.update(user=user.id, bor='bor')
-        #     return HttpResponse('Bajarildi {update}')
-        # else:
-        #     Davomat.objects.create(user=user.id, bor='bor')
-        #     return HttpResponse('Bajarildi {create}')
-        
-        
-            
-    except:
+def bor(request, pk):
+    try:       
+        Davomat.objects.filter(id=pk).update(aktiv=True)         
         return redirect('/davomat/')
+    
+    except:
+        return render(request, "xato/404.html")   
+    
 
 
+def yoq(request, pk):
+    try:       
+        Davomat.objects.filter(id=pk).update(aktiv=False)        
+        return redirect('/davomat/')                  
+  
+    except:
+        return render(request, "xato/404.html")
+
+
+    
+
+def davomat_yangilash(request):
+    try:
+        user = User.objects.filter(lavozim='azo')
+        if user:
+            for u in user:
+                davomat = Davomat.objects.filter(user_id=u.id)
+                if davomat: 
+                    print('update')
+                    Davomat.objects.filter(user_id=u.id).update(
+                        sana=date.today(), 
+                        aktiv=False
+                    )  
+                        
+                else:
+                    data = Davomat.objects.create(
+                        user_id = u.id,
+                        familya = u.last_name,
+                        ism = u.first_name,
+                        aktiv = False,
+                        sana = date.today()
+                    )
+                    data.save()
+                    print('create')
+
+        return redirect("/davomat/")           
+
+
+
+    except:
+        return render(request, "xato/404.html")
+
+    
     
