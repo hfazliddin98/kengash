@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Elon, Statistika
+from .models import Taklif, Statistika
 
 
-@admin.register(Elon)
-class ElonAdmin(admin.ModelAdmin):
+@admin.register(Taklif)
+class TaklifAdmin(admin.ModelAdmin):
     list_display = ['id']
 
 @admin.register(Statistika)

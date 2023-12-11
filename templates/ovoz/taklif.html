@@ -149,7 +149,7 @@
           <h1 class="h2 fw-normal mb-0 text-center">Kengashga taklif kiritish</h1>
         </div>
         <div>
-          <a href="{% url 'elon' %}" class="btn btn-primary rounded-2">Taklif qo`shish</a>
+          <a href="{% url 'taklif_kiritish' %}" class="btn btn-primary rounded-2">Taklif qo`shish</a>
         </div>
       </div>
     </header>
@@ -168,12 +168,12 @@
               </header>
               
               <ol class="list-group">
-                {% for t in data %}
+                {% for k in kiritilgan %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <div class="ms-2 me-auto">
-                    <div class="fw-bold">{{t.vaqt}}:00 {{t.name}} {{t.nomzod}}</div>
+                    <div class="fw-bold">{{k.vaqt}}:00 {{k.name}} {{k.nomzod}}</div>
                   </div>
-                  <a href="{% url 'yoqish' t.pk %}" class="btn btn-primary rounded-2">yoqish</a>
+                  <a href="{% url 'yoqish' k.pk %}" class="btn btn-primary rounded-2">yoqish</a>
                 </li>
                 {% endfor %}
               </ol>
@@ -197,7 +197,7 @@
                   <div class="ms-2 me-auto">
                     <div class="fw-bold">{{b.vaqt}}:00 {{b.name}} {{b.nomzod}}</div>
                   </div>
-                  <a href="{% url 'yoqish' b.pk %}" class="btn btn-primary rounded-2">yoqish</a>
+                  <a href="{% url 'ochirish' b.pk %}" class="btn btn-primary rounded-2">ochirish</a>
                 </li>
                 {% endfor %}
               </ol>

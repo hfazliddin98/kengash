@@ -1,12 +1,12 @@
 from django import forms
-from .models import Elon
+from .models import Taklif
 from users.models import Davomat
 
 
-class ElomForm(forms.ModelForm):
+class TaklifForm(forms.ModelForm):
     class Meta:
-        model = Elon
-        fields = ['name', 'nomzod', 'rasm', 'vaqt']
+        model = Taklif
+        fields = ['name', 'nomzod', 'vaqt']
 
 class DavomatForm(forms.ModelForm):
     class Meta:

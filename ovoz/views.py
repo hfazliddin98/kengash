@@ -1,5 +1,6 @@
 import io
-from datetime import date
+import time
+from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from django.shortcuts import render, redirect, get_object_or_404
@@ -8,8 +9,10 @@ from django.http import HttpResponse
 from django.views import View
 from users.models import User, Davomat
 from users.forms import LoginForm
-from .forms import ElomForm, DavomatForm
-from .models import Elon, Statistika
+from .forms import TaklifForm, DavomatForm
+from .models import Taklif, Statistika
+from .vaqt import tugatish
+
 
 
 
@@ -43,12 +46,12 @@ class HomeView(View):
         try:
             azolar = User.objects.filter(lavozim='azo')
             azo_soni = azolar.__len__
-            elonlar = Elon.objects.all()
+            elonlar = Taklif.objects.all()
             elonlar_soni = elonlar.__len__
-            aktivlar = Elon.objects.filter(yoqish=False)
+            aktivlar = Taklif.objects.filter(yoqish=False)
             aktivlar_soni = aktivlar.__len__
-            baholangan = Elon.objects.filter(yoqish=True)
-            baholangan_soni = baholangan.__len__
+            baholangan = Taklif.objects.filter(yoqish=True)
+            baholangan_soni = baholangan.__len__         
             
            
         except:
@@ -106,14 +109,16 @@ class StatistikaView(View):
 class TaklifView(View):
     def get(self, request):
         try:
-            data = Elon.objects.filter(baza='0')
-            baholangan = Elon.objects.filter(yoqish=True)
+            kiritilgan = Taklif.objects.filter(yoqish=False)
+            baholangan = Taklif.objects.filter(yoqish=True).filter(tugash=False)
+                
+                
         except:
-            data = ''
+            kiritilgan = ''
             baholangan = ''
 
         context = {
-            'data':data,
+            'kiritilgan':kiritilgan,
             'baholangan':baholangan,
         }
         return render(request, 'ovoz/taklif.html', context)
@@ -128,9 +133,9 @@ class TaklifView(View):
     
     
 
-class ElonView(View):
+class TaklifKiritishView(View):
     def get(self, request):
-        form = ElomForm()
+        form = TaklifForm()
 
         context = {
             'form':form,
@@ -138,7 +143,7 @@ class ElonView(View):
         return render(request, 'ovoz/elon.html', context)
     
     def post(self, request):
-        form = ElomForm(request.POST)
+        form = TaklifForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/taklif/')
@@ -161,22 +166,45 @@ class AzoView(View):
         }
         return render(request, 'ovoz/azolar.html', context)
     
-class YoqishView(View):
-    def get(self, request, pk):
-        try:
-            data = Elon.objects.get(id=pk)
-            data.yoqish = 'True'
-            data.baza = '1'
-            data.save()
-            return redirect('/taklif/')
+def taklif_yoqish(request, pk):
+    try:
+        bugun = datetime.now()
+        data = Taklif.objects.get(id=pk)
+        vaqt = bugun + timedelta(minutes=data.vaqt)
+        boshlanish_vaqti = f'{bugun}'
+        tugash_vaqti = f'{vaqt}'
+        data.boshlanish_vaqti = boshlanish_vaqti
+        data.tugash_vaqti = tugash_vaqti
+        data.yoqish = True
+        print(data.vaqt)
+
+        data.save()        
+
+        return redirect('/taklif/')
         
-        except:
-            return HttpResponse('<h1>Taklif yoqilmadi!!!</h1>')
+    except:
+        return render(request, "xato/404.html")
+
+
+
+
+def taklif_ochirish(request, pk):
+    try:
+        data = Taklif.objects.get(id=pk)
+        data.yoqish = False
+        data.save()
+        return redirect('/taklif/')
+        
+    except:
+        return render(request, "xato/404.html")
+
+    
+
         
 class TakliflarAzoView(View):
     def get(self, request):
         try:
-            data = Elon.objects.filter(baza='1')
+            data = Taklif.objects.filter(baza='1')
         except:
             data = ''
 
@@ -253,7 +281,7 @@ def davomat_yangilash(request):
                 if davomat: 
                     print('update')
                     Davomat.objects.filter(user_id=u.id).update(
-                        sana=date.today(), 
+                        sana=datetime.today(), 
                         aktiv=False
                     )  
                         
@@ -263,7 +291,7 @@ def davomat_yangilash(request):
                         familya = u.last_name,
                         ism = u.first_name,
                         aktiv = False,
-                        sana = date.today()
+                        sana = datetime.today()
                     )
                     data.save()
                     print('create')
@@ -274,6 +302,9 @@ def davomat_yangilash(request):
 
     except:
         return render(request, "xato/404.html")
+    
+
+    
 
     
     
