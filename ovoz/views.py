@@ -140,7 +140,7 @@ class TaklifKiritishView(View):
         context = {
             'form':form,
         }
-        return render(request, 'ovoz/elon.html', context)
+        return render(request, 'ovoz/taklif_kiritish.html', context)
     
     def post(self, request):
         form = TaklifForm(request.POST)
@@ -152,7 +152,7 @@ class TaklifKiritishView(View):
         context = {
             'form':form,
         }
-        return render(request, 'ovoz/elon.html', context)
+        return render(request, 'ovoz/taklif_kiritish.html', context)
     
 class AzoView(View):
     def get(self, request):
@@ -166,6 +166,7 @@ class AzoView(View):
         }
         return render(request, 'ovoz/azolar.html', context)
     
+    
 def taklif_yoqish(request, pk):
     try:
         bugun = datetime.now()
@@ -175,10 +176,9 @@ def taklif_yoqish(request, pk):
         tugash_vaqti = f'{vaqt}'
         data.boshlanish_vaqti = boshlanish_vaqti
         data.tugash_vaqti = tugash_vaqti
-        data.yoqish = True
-        print(data.vaqt)
-
-        data.save()        
+        data.yoqish = True        
+        data.save()
+         
 
         return redirect('/taklif/')
         
@@ -191,6 +191,8 @@ def taklif_yoqish(request, pk):
 def taklif_ochirish(request, pk):
     try:
         data = Taklif.objects.get(id=pk)
+        data.boshlanish_vaqti = ''
+        data.tugash_vaqti = ''
         data.yoqish = False
         data.save()
         return redirect('/taklif/')
@@ -204,9 +206,22 @@ def taklif_ochirish(request, pk):
 class TakliflarAzoView(View):
     def get(self, request):
         try:
-            data = Taklif.objects.filter(baza='1')
+            bugun = datetime.today()
+            data = Taklif.objects.filter(yoqish=True).filter(tugash=False)
+            for d in data:
+                tugash = f'{d.tugash_vaqti}'
+                sana = f'{bugun}'
+                if tugash[:16] <= sana[:16]:
+                    taklif = Taklif.objects.get(id=d.id)
+                    taklif.tugash = True
+                    taklif.save()
+                    print('bajarildi')
+                else:
+                    print('bajarilmadi')
+                
         except:
             data = ''
+            print('except')
 
         context = {
             'data':data,
