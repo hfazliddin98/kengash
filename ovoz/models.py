@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 
 class Taklif(models.Model):
@@ -11,9 +12,9 @@ class Taklif(models.Model):
     tugash = models.BooleanField(default=False)
  
 class Baxo(models.Model):
-    elon = models.ForeignKey(Taklif, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    taklif_id = models.ForeignKey(Taklif, on_delete=models.CASCADE)
     baxo = models.CharField(max_length=200)
-    baza = models.CharField(max_length=10, default='0')
 
 
 class Statistika(models.Model):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Taklif, Statistika
+from .models import Taklif, Statistika, Baxo
 
 
 @admin.register(Taklif)
@@ -8,4 +8,8 @@ class TaklifAdmin(admin.ModelAdmin):
 
 @admin.register(Statistika)
 class StatistikaAdmin(admin.ModelAdmin):
+    list_display = ['id']
+
+@admin.register(Baxo)
+class BaxoAdmin(admin.ModelAdmin):
     list_display = ['id']

@@ -10,7 +10,7 @@ from django.views import View
 from users.models import User, Davomat
 from users.forms import LoginForm
 from .forms import TaklifForm, DavomatForm
-from .models import Taklif, Statistika
+from .models import Taklif, Statistika, Baxo
 from .vaqt import tugatish
 
 
@@ -231,8 +231,26 @@ class TakliflarAzoView(View):
 
 class RozilarView(View):
     def get(self, request, pk):
+        try:
+            data = Baxo.objects.get(taklif_id=pk)
+            if data:
+                # Baxo.objects.filter(user_id=request.user.id).update(baxo='roziman')
+                return HttpResponse("Update")
+            else:
+                # Baxo.objects.create(
+                #     taklif_id=pk,
+                #     user_id=request.user.id,
+                #     baxo='roziman'
+                # )
+            # return redirect("/taklif_azo/")
+                return HttpResponse('Create')
 
-        return redirect("/taklif_azo/")
+
+
+        except:            
+            return HttpResponse('Bajarilmadi')
+
+            # return redirect("/taklif_azo/")
         
     
 class QarshilarView(View):
