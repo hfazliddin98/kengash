@@ -48,8 +48,8 @@ def kirish(request):
                 user.save()
                 return redirect('/')
     except:                
-        # return redirect('/kirish')
-        return HttpResponse('Bajarilmadi')
+        return redirect('/kirish')
+        
 
 
 class HomeView(View):
