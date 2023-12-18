@@ -3,6 +3,8 @@ import time
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import login, authenticate, get_user_model
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -85,7 +87,6 @@ def home(request):
 
 
 class HomeView(View):
-    @csrf_exempt
     def get(self, request):
         form = LoginForm()
         try:
@@ -132,6 +133,36 @@ class HomeView(View):
         }
         return render(request, 'asosiy/home.html', context)
     
+
+def azo_qoshish(request):
+    try:
+        if request.method == 'POST':
+            username = request.POST['username']
+            last_name = request.POST['last_name']
+            first_name = request.POST['first_name']
+            lavozim = request.POST['lavozim']
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
+            if User.objects.filter(username=username):
+                return HttpResponse("Bunday azo mavjud") 
+            elif password1 != password2:
+                return HttpResponse("Parollar bir biriga teng emas")
+            else:
+                user = get_user_model().objects.create(
+                    username = username, last_name = last_name, 
+                    first_name = first_name, lavozim=lavozim, 
+                    password = make_password(password1)) 
+                user.is_active = False
+                user.is_staff = False
+                
+                return redirect('/azo/')
+        return render(request, 'users/azo_qoshish.html')
+    except:
+        return HttpResponse('Azo qo`shilmadi')
+
+
+
+
 
 class StatistikaView(View):
     def get(self, request):

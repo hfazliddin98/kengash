@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from .forms import RoyhatForm
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 
 
+@method_decorator(csrf_protect, name='dispatch')
 class RoyhatView(View):
     def get(self, request):
         form = RoyhatForm()
