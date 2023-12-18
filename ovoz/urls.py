@@ -3,7 +3,7 @@ from django.urls import path
 from .views import HomeView, StatistikaView, TaklifKiritishView, TaklifView, AzoView, \
     TakliflarAzoView, DavomatView, bor, yoq, \
     davomat_yangilash, taklif_yoqish, taklif_ochirish
-from .views import diyogramma, roziman, qarshiman, betarafman
+from .views import diyogramma, roziman, qarshiman, betarafman, kirish
 
 
 urlpatterns = [
@@ -22,5 +22,6 @@ urlpatterns = [
     path('davomat/', DavomatView.as_view(), name='davomat'),
     path('bor/<int:pk>/', bor, name='bor'),
     path('yoq/<int:pk>/', yoq, name='yoq'),
+    path('kirish/', kirish, name='kirish'),
     path('davomat_yangilash/', davomat_yangilash, name='davomat_yangilash'),
 ]
