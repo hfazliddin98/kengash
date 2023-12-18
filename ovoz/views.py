@@ -2,6 +2,7 @@ import io
 import time
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
+from django.views.decorators.csrf import csrf_exempt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -14,7 +15,7 @@ from .models import Taklif, Statistika, Baxo
 
 
 
-
+@csrf_exempt
 def diyogramma(request, pk):
     data = Statistika.objects.filter(id=pk)
     for d in data:
@@ -38,6 +39,7 @@ def diyogramma(request, pk):
 
 
 class HomeView(View):
+    @csrf_exempt
     def get(self, request):
         form = LoginForm()
         try:
@@ -67,7 +69,20 @@ class HomeView(View):
         }
         return render(request, 'asosiy/home.html', context)
     
+    @csrf_exempt
     def post(self, request):
+        # try:
+        #     if request.method == 'POST':
+        #         username = request.POST['username']
+        #         password = request.POST['password']
+        #         user = authenticate(request, username=username, password=password)
+        #         if user is not None:
+        #             login(request, user)
+        #             user.save()
+        #             return redirect('/')
+        # except:                
+        #     # return redirect('/kirish')
+        #     return HttpResponse('Bajarilmadi')
         form = LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
