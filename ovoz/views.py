@@ -133,7 +133,7 @@ class HomeView(View):
         }
         return render(request, 'asosiy/home.html', context)
     
-
+@csrf_exempt
 def azo_qoshish(request):
     try:
         if request.method == 'POST':
