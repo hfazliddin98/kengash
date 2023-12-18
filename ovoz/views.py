@@ -36,7 +36,9 @@ def diyogramma(request, pk):
         response = HttpResponse(buf.read(), content_type='image/png')
         response['Content-Disposition'] = 'inline; filename=diagram.png'   
         return response
-    
+
+
+@csrf_exempt   
 def kirish(request):
     try:
         if request.method == 'POST':
@@ -47,6 +49,8 @@ def kirish(request):
                 login(request, user)
                 user.save()
                 return redirect('/')
+            
+        return render(request, 'asosiy/kirish.html')
     except:                
         return redirect('/kirish')
         
