@@ -12,15 +12,15 @@ class Taklif(models.Model):
     tugash = models.BooleanField(default=False)
  
 class Baxo(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    taklif_id = models.ForeignKey(Taklif, on_delete=models.CASCADE)
+    user_id = models.CharField(max_length=10)
+    taklif_id = models.CharField(max_length=10)
     baxo = models.CharField(max_length=200)
 
 
 class Statistika(models.Model):
-    elon = models.ForeignKey(Taklif, on_delete=models.CASCADE)
+    taklif_id = models.CharField(max_length=10)
     rozilar = models.IntegerField(default=0)
     qarshilar = models.IntegerField(default=0)
-    betaraf = models.IntegerField(default=0)
-    qatnashmagan = models.IntegerField(default=0)
-    rasm = models.ImageField(upload_to='statistika/')
+    betaraflar = models.IntegerField(default=0)
+    qatnashmaganlar = models.IntegerField(default=0)
+    rasm = models.ImageField(upload_to='statistika/', blank=True)

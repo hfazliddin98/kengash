@@ -135,9 +135,9 @@
                 <h5 class="card-title">{{d.name}}</h5>
                 <p class="card-text">Nomzod: {{d.nomzod}}ni tayorlash</p>
                 <div class="d-flex justify-content-between align-items-center w-100">
-                  <a href="{% url 'rozilar' d.pk %}" style="width: 120px;" class="btn btn-primary rounded-2 mx-2">roziman</a>
-                  <a href="" style="width: 120px;" class="btn btn-danger rounded-2 mx-2">qarshiman</a>
-                  <a href="" style="width: 120px;" class="btn btn-yellow rounded-2 mx-2">betarafman</a>
+                  <a href="{% url 'roziman' d.pk %}" style="width: 120px;" class="btn btn-primary rounded-2 mx-2">roziman</a>
+                  <a href="{% url 'qarshiman' d.pk %}" style="width: 120px;" class="btn btn-danger rounded-2 mx-2">qarshiman</a>
+                  <a href="{% url 'betarafman' d.pk %}" style="width: 120px;" class="btn btn-yellow rounded-2 mx-2">betarafman</a>
                 </div>               
               </div>
             </div>

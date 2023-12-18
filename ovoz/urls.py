@@ -1,10 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 from .views import HomeView, StatistikaView, TaklifKiritishView, TaklifView, AzoView, \
-    TakliflarAzoView, RozilarView, QarshilarView, BetaraflarView, DavomatView, bor, yoq, \
+    TakliflarAzoView, DavomatView, bor, yoq, \
     davomat_yangilash, taklif_yoqish, taklif_ochirish
-from .views import diyogramma
-from .vaqt import tugatish
+from .views import diyogramma, roziman, qarshiman, betarafman
 
 
 urlpatterns = [
@@ -17,12 +16,11 @@ urlpatterns = [
     path('yoqish/<int:pk>/', taklif_yoqish, name='yoqish'),
     path('ochirish/<int:pk>/', taklif_ochirish, name='ochirish'),
     path('taklif_azo/', TakliflarAzoView.as_view(), name='taklif_azo'),
-    path('rozilar/<int:pk>/', RozilarView.as_view(), name='rozilar'),
-    path('qarshilar/<int:pk>/', QarshilarView.as_view(), name='qarshilar'),
-    path('betaraflar/<int:pk>/', BetaraflarView.as_view(), name='betaraflar'),
+    path('roziman/<int:pk>/', roziman, name='roziman'),
+    path('qarshiman/<int:pk>/', qarshiman, name='qarshiman'),
+    path('betarafman/<int:pk>/', betarafman, name='betarafman'),
     path('davomat/', DavomatView.as_view(), name='davomat'),
     path('bor/<int:pk>/', bor, name='bor'),
     path('yoq/<int:pk>/', yoq, name='yoq'),
     path('davomat_yangilash/', davomat_yangilash, name='davomat_yangilash'),
-    path('tugatish/<int:pk>/', tugatish, name='tugatish'),
 ]

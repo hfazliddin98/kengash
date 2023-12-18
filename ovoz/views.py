@@ -11,9 +11,6 @@ from users.models import User, Davomat
 from users.forms import LoginForm
 from .forms import TaklifForm, DavomatForm
 from .models import Taklif, Statistika, Baxo
-from .vaqt import tugatish
-
-
 
 
 
@@ -90,10 +87,30 @@ class HomeView(View):
 class StatistikaView(View):
     def get(self, request):
         try:
-            data = Statistika.objects.all()
-            x = [x.rozilar for x in data]
-            y = [y.qarshilar for y in data]
-            print(f'{x} va {y}')
+            baxo = Baxo.objects.all()
+            if baxo:
+                for b in baxo:
+                    statistika = Statistika.objects.filter(taklif_id=b.taklif_id)
+                    if statistika:
+                        Statistika.objects.filter(taklif_id =b.taklif_id).update(                            
+                            rozilar="0",
+                            qarshilar = "0",
+                            betaraflar = "0",
+                            qatnashmaganlar = "0"
+                        )                        
+                        return HttpResponse("Update")
+                    else:
+                        # rozilar = Baxo.objects.filter(baxo="roziman")
+                        # rozilar_soni = rozilar.__all__
+                        data = Statistika.objects.create(
+                            taklif_id =b.taklif_id,
+                            rozilar="0",
+                            qarshilar = "0",
+                            betaraflar = "0",
+                            qatnashmaganlar = "0"
+                        )
+                        data.save()
+                        return HttpResponse("Create")
 
         except:
             return render(request, 'xato/404.html')
@@ -101,7 +118,7 @@ class StatistikaView(View):
 
        
         context = {
-            'data':data,
+
         }
         return render(request, 'ovoz/statistika.html', context)
     
@@ -229,42 +246,74 @@ class TakliflarAzoView(View):
         return render(request, 'ovoz/taklif_azo.html', context)
         
 
-class RozilarView(View):
-    def get(self, request, pk):
-        try:
-            data = Baxo.objects.get(taklif_id=pk)
-            if data:
-                # Baxo.objects.filter(user_id=request.user.id).update(baxo='roziman')
-                return HttpResponse("Update")
-            else:
-                # Baxo.objects.create(
-                #     taklif_id=pk,
-                #     user_id=request.user.id,
-                #     baxo='roziman'
-                # )
-            # return redirect("/taklif_azo/")
-                return HttpResponse('Create')
+def roziman(request, pk):
+    try:
+        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
+        if taklif:
+            for t in taklif:
+                baxo = Baxo.objects.filter(taklif_id=t.id).filter(user_id=request.user.id)
+                if baxo:
+                    return render(request, 'xato/ovoz.html')
+                else:
+                    data = Baxo.objects.create(
+                        user_id = request.user.id ,
+                        taklif_id = t.id,
+                        baxo = "roziman"
+                    )
+                    data.save()
+                    
+                    return render(request, 'xato/200.html')   
 
 
+    except:
+        return render(request, 'xato/404.html')
 
-        except:            
-            return HttpResponse('Bajarilmadi')
 
-            # return redirect("/taklif_azo/")
-        
+def qarshiman(request, pk):
+    try:
+        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
+        if taklif:
+            for t in taklif:
+                baxo = Baxo.objects.filter(taklif_id=t.id).filter(user_id=request.user.id)
+                if baxo:
+                    return render(request, 'xato/ovoz.html')
+                else:
+                    data = Baxo.objects.create(
+                        user_id = request.user.id ,
+                        taklif_id = t.id,
+                        baxo = "qarshiman"
+                    )
+                    data.save()
+                    
+                    return render(request, 'xato/200.html')   
+
+
+    except:
+        return render(request, 'xato/404.html')
     
-class QarshilarView(View):
-    def get(self, request, pk):
+def betarafman(request, pk):
+    try:
+        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
+        if taklif:
+            for t in taklif:
+                baxo = Baxo.objects.filter(taklif_id=t.id).filter(user_id=request.user.id)
+                if baxo:
+                    return render(request, 'xato/ovoz.html')
+                else:
+                    data = Baxo.objects.create(
+                        user_id = request.user.id ,
+                        taklif_id = t.id,
+                        baxo = "betarafman"
+                    )
+                    data.save()
+                    
+                    return render(request, 'xato/200.html')   
 
 
-        return redirect("/taklif_azo/")
-
-    
-class BetaraflarView(View):
-    def get(self, request, pk):
+    except:
+        return render(request, 'xato/404.html')
 
 
-        return redirect("/taklif_azo/")
     
 
 class DavomatView(View):
