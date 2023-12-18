@@ -521,44 +521,112 @@
 
   {% else %}
 
-  <div class="login-page d-flex align-items-center bg-gray-100">
-    <div class="container mb-3">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <div class="card">
-            <div class="card-body p-5">
-              <header class="text-center mb-5">
-                <h1 class="text-xxl text-gray-400 text-uppercase"><strong class="text-primary">Qo`qon Davlat Pedagogika
-                    Inistituti</strong></h1>
-                <p class="text-gray-500 fw-light">Inistitut ichki kengshiga kirish</p>
-              </header>
-              <form class="login-form" method="post">
-                {% csrf_token %}
-                <div class="row">
-                  <div class="col-lg-7 mx-auto">
-                    <div class="input-material-group mb-3">
-                      <input class="input-material" id="login-username" type="text" name="username" autocomplete="off"
-                        required data-validate-field="username">
-                      <label class="label-material" for="login-username">Foydalanuvchi nomi</label>
-                    </div>
-                    <div class="input-material-group mb-4">
-                      <input class="input-material" id="login-password" type="password" name="password" required>
-                      <label class="label-material" for="login-password">Parol</label>
-                    </div>
-                  </div>
-                  <div class="col-12 text-center">
-                    <button class="btn btn-primary mb-3" id="login" type="submit">Kirish</button>
+  <!-- ro`yhatdan o`tmasdan olidin -->
+  <div class="container-fluid px-0">
+    <div class="row">
+      <nav class="navbar bg-body-tertiary px-0 mx-0 w-100">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="https://img.razrisyika.ru/kart/94/372802-logo-6.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            QDPI Kengashi
+          </a>
+          <span>
+            <a href="{% url 'kirish' %}" class="btn btn-primary">kirish</a>
+          </span>
+        </div>
+      </nav>
+    </div>
 
-                  </div>
-                </div>
-              </form>
+    <div class="row">
+      <div id="carouselExampleDark" class="carousel carousel-dark slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <img src="https://img.fonwall.ru/o/3g/abstrakciya-tekstura-fon-fony-dlya-dizayna-lyci.jpg?auto=compress&fit=resize&w=1200&display=large" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>First slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
             </div>
-            <a href="{% url 'kirish' %}">login</a>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img src="https://img.fonwall.ru/o/3g/abstrakciya-tekstura-fon-fony-dlya-dizayna-lyci.jpg?auto=compress&fit=resize&w=1200&display=large" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Second slide label</h5>
+              <p>Some representative placeholder content for the second slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://img.fonwall.ru/o/3g/abstrakciya-tekstura-fon-fony-dlya-dizayna-lyci.jpg?auto=compress&fit=resize&w=1200&display=large" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Third slide label</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div>
           </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
   </div>
+
+  <footer>
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-lg-4 col-md-12">
+                <div class=" row logo mb-4">
+                    <div class="col-2">
+                        <span class="img-bg">
+                            <img src="https://img.razrisyika.ru/kart/94/372802-logo-6.jpg" width="20px" height="20px" alt="kspi logotip">
+                        </span>
+                    </div>
+                    <h5 class="col-9">shartnoma.kspi.uz</h5>
+                </div>
+                <p>"Talabalarning o'quv amaliyoti uchun shartnoma olish axborot tizimi" dasturiy majmuasi</p>
+            </div>
+            <div class="col-lg-4 col-md-6 connect">
+                <h4>Bog'lanish</h4>
+                <p>Ishonch telefoni: +998(90) 567 12 75</p>
+                <p>Qo'qon shahar, Turon ko'chasi, 23-uy</p>
+                <a href="https://kspi.uz/">www.kspi.uz</a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h4>Bizning ijtimoiy tarmoqlar</h4>
+                <a href="https://www.facebook.com/kspi.uz.56" class="socials">
+                    <i class="fa-brands fa-facebook"></i>
+                    <p>Facebook</p>
+                </a>
+                <a href="https://t.me/kspi_official" class="socials">
+                    <i class="fa-brands fa-telegram"></i>
+                    <p>Telegram</p>
+                </a>
+                <a href="https://www.instagram.com/kspi_uz/" class="socials">
+                    <i class="fa-brands fa-instagram"></i>
+                    <p>Instagram</p>
+                </a>
+                <a href="https://www.youtube.com/channel/UC6ThR8cLnJmdWDGDz9PR85Q/featured" class="socials">
+                    <i class="fa-brands fa-youtube"></i>
+                    <p>YouTube</p>
+                </a>
+            </div>
+            
+        </div>
+    </div>
+    <div class="text-center">
+        <h5 class="col">2023 &#169 QDPI IT-park</h5>
+    </div>
+</footer>
+
+  
 
   {% endif %}
 

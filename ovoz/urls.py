@@ -9,6 +9,7 @@ from .views import diyogramma, roziman, qarshiman, betarafman, kirish, home
 urlpatterns = [
     # path('', HomeView.as_view(), name='home'),
     path('', home, name='home'),
+    path('kirish/', kirish, name='kirish'),
     path('statistika/', StatistikaView.as_view(), name='statistika'),
     path('taklif/', TaklifView.as_view(), name='taklif'),
     path('taklif_kiritish/', TaklifKiritishView.as_view(), name='taklif_kiritish'),
@@ -23,6 +24,5 @@ urlpatterns = [
     path('davomat/', DavomatView.as_view(), name='davomat'),
     path('bor/<int:pk>/', bor, name='bor'),
     path('yoq/<int:pk>/', yoq, name='yoq'),
-    path('kirish/', kirish, name='kirish'),
     path('davomat_yangilash/', davomat_yangilash, name='davomat_yangilash'),
 ]
