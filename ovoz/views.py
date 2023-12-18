@@ -53,6 +53,34 @@ def kirish(request):
         return render(request, 'asosiy/kirish.html')
     except:                
         return redirect('/kirish')
+    
+@csrf_exempt  
+def home(request):
+    try:
+            azolar = User.objects.filter(lavozim='azo')
+            azo_soni = azolar.__len__
+            elonlar = Taklif.objects.all()
+            elonlar_soni = elonlar.__len__
+            aktivlar = Taklif.objects.filter(yoqish=False)
+            aktivlar_soni = aktivlar.__len__
+            baholangan = Taklif.objects.filter(yoqish=True)
+            baholangan_soni = baholangan.__len__         
+            
+           
+    except:
+            azo_soni = '0'
+            elonlar_soni = '0'
+            aktivlar_soni = '0'
+            baholangan_soni = '0'
+
+
+    context = {
+            'azo_soni':azo_soni,
+            'elonlar_soni':elonlar_soni,
+            'aktivlar_soni':aktivlar_soni,
+            'baholangan_soni':baholangan_soni,
+        }
+    return render(request, 'asosiy/home.html', context)
         
 
 

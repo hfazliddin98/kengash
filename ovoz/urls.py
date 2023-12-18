@@ -3,11 +3,12 @@ from django.urls import path
 from .views import HomeView, StatistikaView, TaklifKiritishView, TaklifView, AzoView, \
     TakliflarAzoView, DavomatView, bor, yoq, \
     davomat_yangilash, taklif_yoqish, taklif_ochirish
-from .views import diyogramma, roziman, qarshiman, betarafman, kirish
+from .views import diyogramma, roziman, qarshiman, betarafman, kirish, home
 
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
+    # path('', HomeView.as_view(), name='home'),
+    path('', home, name='home'),
     path('statistika/', StatistikaView.as_view(), name='statistika'),
     path('taklif/', TaklifView.as_view(), name='taklif'),
     path('taklif_kiritish/', TaklifKiritishView.as_view(), name='taklif_kiritish'),
