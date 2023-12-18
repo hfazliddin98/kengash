@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +36,7 @@
             <div class="sidebar-header d-flex align-items-center justify-content-center p-3 mb-3">
                 <!-- User Info-->
                 <div class="sidenav-header-inner text-center"><img class="img-fluid rounded-circle avatar mb-3"
-                        src="{% static '/img/user.png' %}" alt="person">
+                        src="{% static 'img/icon-user.png' %}" alt="person">
                     <h2 class="h5 text-white text-uppercase mb-0">{{user.username}}</h2>
                     <p class="text-sm mb-0 text-muted">admin</p>
                 </div>
@@ -59,7 +58,7 @@
                 </li>
         
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="{% url 'azo' %}">
+                  <a class="sidebar-link" href="{% url 'azolar' %}">
                     <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
                       <use xlink:href="#quality-1"> </use>
                     </svg>
@@ -68,7 +67,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{% url 'davomat' %}">
+                    <a class="sidebar-link bg-success" href="{% url 'davomat' %}">
                         <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
                             <use xlink:href="#quality-1"> </use>
                         </svg>
@@ -99,35 +98,32 @@
     </nav>
     <div class="page">
         <!-- navbar-->
-        <header class="header mb-5 pb-3">
-            <nav class="nav navbar fixed-top">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between w-100">
-
-                        <div class="d-flex align-items-center">
-                            <a class="menu-btn d-flex align-items-center justify-content-center p-2 bg-gray-900"
-                                id="toggle-btn" href="#">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-white">
-                                    <use xlink:href="#menu-1"> </use>
-                                </svg></a><a class="navbar-brand ms-2" href="{% url 'home' %}">
-                                <div class="brand-text d-none d-md-inline-block text-uppercase letter-spacing-0">
-                                    <strong class="text-primary text-sm">QDPI kengashi</strong>
-                                </div>
-                            </a>
+        <header class="style-heder-w header pb-3">
+            <nav class="nav navbar fixed-top bg-white px-4">
+                <div class="w-100 d-flex align-items-center">
+                    <a class="menu-btn d-flex align-items-center justify-content-center p-2" id="toggle-btn" href="#">
+                    <img width="25px" src="{% static '/img/icon-menu.png' %}" alt="">
+                    </a>
+                    <ul class="w-100 nav-menu mb-0 list-unstyled d-flex justify-content-between flex-md-row align-items-center">
+                    <!-- Notifications dropdown-->
+                    <li class="ms-4">
+                        <div class="px-md-1 px-lg-3 d-none d-md-inline-block">
+                        <a class="navbar-brand d-flex align-items-center gap-3 style-loge-text"href="./index.html">                  
+                        <img class="style-w-logo mb-2" src="{% static '/img/logo_kspi.png' %}" alt="Logo" />
+                        QDPI Kengash
+                        </a>
                         </div>
-
-                        <ul class="nav-menu mb-0 list-unstyled d-flex flex-md-row align-items-md-center">
-                            <!-- Log out-->
-                            <li class="nav-item"><a class="nav-link text-white text-sm ps-0" href="{% url 'logout' %}">
-                                    <span class="d-none d-sm-inline-block">Chiqish</span>
-                                    <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                                        <use xlink:href="#security-1"> </use>
-                                    </svg></a></li>
-                        </ul>
-                    </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}" type="a" class="btn btn-success costom-btn-border-radius costom-btn-respanse">
+                        CHIQISH
+                        </a>
+                    </li>
+                    </ul>
                 </div>
             </nav>
         </header>
+        
 
         <!-- Breadcrumb-->
         <div class="bg-gray-200 text-sm">
@@ -141,83 +137,66 @@
             </div>
         </div>
         <!-- Page Header-->
-        <header class="py-4">
-            <div class="container-fluid py-2">
-                <h1 class="h2 fw-normal mb-0 text-center d-md-inline-block">Kengashda qatnashayotgan a`zolar</h1>
-                <span class="text-end">
-                    <a href="{% url 'davomat_yangilash' %}">Yangilash</a>
-                </span>
+        <header class="container py-4 px-2 px-sm-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>Kengash a'zolari</h1>
+                <a class="btn btn-success" href="{% url 'davomat_yangilash' %}">Yangilash</a>
             </div>
         </header>
 
         <section>
-            <div class="container-fluid">
-                <div class="row">
-
-                    <div class="col-lg-6">
-                        <div class="bg-white mb-0">
-                            <p class="border-botton mb-0 p-3 text-center">
-                                Kengashda qatnashmayotganlar
-                            </p>
-                        </div>
-                        <div class="card">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Familya</th>
-                                        <th scope="col">Ism</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for b in yoqlar %}
+            <div class="container px-lg-4">
+                <div class="row gap-4 pt-5">
+                    <div class="col">
+                        <h5 class="text-center py-2">Kengashda qatnashmayotganlar</h5>
+                        <table class="table shadow">
+                            <thead class="rounded">
+                            <tr class="table-light rounded">
+                                <th scope="col">№</th>
+                                <th scope="col">Familiya</th>
+                                <th scope="col">Ism</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for b in yoqlar %}
                                     <tr>
                                         <th scope="row">{{b.id}}</th>
                                         <td>{{b.familya}}</td>
                                         <td>{{b.ism}}</td>
                                         <td>
-                                            <a href="{% url 'bor' b.pk %}">bor</a>
+                                            <a href="{% url 'bor' b.pk %}">Bor</a>
                                         </td>
                                     </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="col-lg-6">
-                        <div class="bg-white mb-0">
-                            <p class="border-botton mb-0 p-3 text-center">
-                                Kengashda borlar
-                            </p>
-                        </div>
-                        <div class="card">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Familya</th>
-                                        <th scope="col">Ism</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for y in borlar %}
-                                    <tr>
-                                        <th scope="row">{{y.id}}</th>
-                                        <td>{{y.familya}}</td>
-                                        <td>{{y.ism}}</td>
-                                        <td>
-                                            <a  href="{% url 'yoq' y.pk %}">yo`q</a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="col">
+                        <h5 class="text-center py-2">Kengashda qatnashmayotganlar</h5>
+                        <table class="table shadow">
+                            <thead class="rounded">
+                                <tr class="table-light rounded">
+                                    <th scope="col">№</th>
+                                    <th scope="col">Familiya</th>
+                                    <th scope="col">Ism</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for y in borlar %}
+                                <tr>
+                                    <th scope="row">{{y.id}}</th>
+                                    <td>{{y.familya}}</td>
+                                    <td>{{y.ism}}</td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="{% url 'yoq' y.pk %}">Yo`q</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -345,7 +324,10 @@
         <!-- Page Header-->
         <header class="py-4">
             <div class="container-fluid py-2">
-                <h1 class="h2 fw-normal mb-0 text-center">Kengashda qatnashayotgan a`zolar</h1>
+                <h1 class="h2 fw-normal mb-0 text-center d-md-inline-block">Kengashda qatnashayotgan a`zolar</h1>
+                <span class="text-end">
+                    <a href="{% url 'davomat_yangilash' %}">Yangilash</a>
+                </span>
             </div>
         </header>
 
