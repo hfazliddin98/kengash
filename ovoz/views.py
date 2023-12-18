@@ -71,32 +71,32 @@ class HomeView(View):
     
     @csrf_exempt
     def post(self, request):
-        # try:
-        #     if request.method == 'POST':
-        #         username = request.POST['username']
-        #         password = request.POST['password']
-        #         user = authenticate(request, username=username, password=password)
-        #         if user is not None:
-        #             login(request, user)
-        #             user.save()
-        #             return redirect('/')
-        # except:                
-        #     # return redirect('/kirish')
-        #     return HttpResponse('Bajarilmadi')
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(request, username=data['username'], password=data['password'])
-            if user:
-                login(request, user)
-                return redirect('/')
-            else:
-                return HttpResponse('Foydalanuvchi yoki parol xato !!!')
+        try:
+            if request.method == 'POST':
+                username = request.POST['username']
+                password = request.POST['password']
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    user.save()
+                    return redirect('/')
+        except:                
+            # return redirect('/kirish')
+            return HttpResponse('Bajarilmadi')
+        # form = LoginForm(request.POST)
+        # if form.is_valid():
+        #     data = form.cleaned_data
+        #     user = authenticate(request, username=data['username'], password=data['password'])
+        #     if user:
+        #         login(request, user)
+        #         return redirect('/')
+        #     else:
+        #         return HttpResponse('Foydalanuvchi yoki parol xato !!!')
         
-        context = {
-            'form':form,
-        }
-        return render(request, 'asosiy/home.html', context)
+        # context = {
+        #     'form':form,
+        # }
+        # return render(request, 'asosiy/home.html', context)
     
 
 class StatistikaView(View):
