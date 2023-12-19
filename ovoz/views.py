@@ -85,53 +85,7 @@ def home(request):
     return render(request, 'asosiy/home.html', context)
         
 
-
-class HomeView(View):
-    def get(self, request):
-        form = LoginForm()
-        try:
-            azolar = User.objects.filter(lavozim='azo')
-            azo_soni = azolar.__len__
-            elonlar = Taklif.objects.all()
-            elonlar_soni = elonlar.__len__
-            aktivlar = Taklif.objects.filter(yoqish=False)
-            aktivlar_soni = aktivlar.__len__
-            baholangan = Taklif.objects.filter(yoqish=True)
-            baholangan_soni = baholangan.__len__         
-            
-           
-        except:
-            azo_soni = '0'
-            elonlar_soni = '0'
-            aktivlar_soni = '0'
-            baholangan_soni = '0'
-
-
-        context = {
-            'form':form,
-            'azo_soni':azo_soni,
-            'elonlar_soni':elonlar_soni,
-            'aktivlar_soni':aktivlar_soni,
-            'baholangan_soni':baholangan_soni,
-        }
-        return render(request, 'asosiy/home.html', context)
     
-    @csrf_exempt
-    def post(self, request):       
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(request, username=data['username'], password=data['password'])
-            if user:
-                login(request, user)
-                return redirect('/')
-            else:
-                return HttpResponse('Foydalanuvchi yoki parol xato !!!')
-        
-        context = {
-            'form':form,
-        }
-        return render(request, 'asosiy/home.html', context)
     
 @csrf_exempt
 def azo_qoshish(request):
@@ -161,109 +115,89 @@ def azo_qoshish(request):
         return HttpResponse('Azo qo`shilmadi')
 
 
-
-
-
-class StatistikaView(View):
-    def get(self, request):
-        try:
-            baxo = Baxo.objects.all()
-            if baxo:
-                for b in baxo:
-                    statistika = Statistika.objects.filter(taklif_id=b.taklif_id)
-                    if statistika:
-                        Statistika.objects.filter(taklif_id =b.taklif_id).update(                            
+@csrf_exempt
+def statistika(request):
+    try:
+        baxo = Baxo.objects.all()
+        if baxo:
+            for b in baxo:
+                static = Statistika.objects.filter(taklif_id=b.taklif_id)
+                if static:
+                    Statistika.objects.filter(taklif_id =b.taklif_id).update(                            
                             rozilar="0",
                             qarshilar = "0",
                             betaraflar = "0",
                             qatnashmaganlar = "0"
                         )                        
-                        return HttpResponse("Update")
-                    else:
-                        # rozilar = Baxo.objects.filter(baxo="roziman")
-                        # rozilar_soni = rozilar.__all__
-                        data = Statistika.objects.create(
-                            taklif_id =b.taklif_id,
-                            rozilar="0",
-                            qarshilar = "0",
-                            betaraflar = "0",
-                            qatnashmaganlar = "0"
-                        )
-                        data.save()
-                        return HttpResponse("Create")
-
-        except:
-            return render(request, 'xato/404.html')
-        
+                    return render(request, 'ovoz/statistika.html')
+                else:                   
+                    data = Statistika.objects.create(
+                        taklif_id =b.taklif_id,
+                        rozilar="0",
+                        qarshilar = "0",
+                        betaraflar = "0",
+                        qatnashmaganlar = "0"
+                    )
+                    data.save()
+                    return render(request, 'ovoz/statistika.html')
+                
+    except:
+        return render(request, 'xato/404.html')     
 
        
-        context = {
+      
+    return render(request, 'ovoz/statistika.html')
 
-        }
-        return render(request, 'ovoz/statistika.html', context)
-    
 
-class TaklifView(View):
-    def get(self, request):
-        try:
-            kiritilgan = Taklif.objects.filter(yoqish=False)
-            baholangan = Taklif.objects.filter(yoqish=True).filter(tugash=False)
+@csrf_exempt
+def taklif(request):
+    try:
+        kiritilgan = Taklif.objects.filter(yoqish=False)
+        baholangan = Taklif.objects.filter(yoqish=True).filter(tugash=False)
                 
                 
-        except:
-            kiritilgan = ''
-            baholangan = ''
+    except:
+        kiritilgan = ''
+        baholangan = ''
 
-        context = {
-            'kiritilgan':kiritilgan,
-            'baholangan':baholangan,
-        }
-        return render(request, 'ovoz/taklif.html', context)
-    
-    def post(self, request):
-        
-        
-        context = {
-
-        }
-        return render(request, 'asosiy/home.html', context)
-    
-    
-
-class TaklifKiritishView(View):
-    def get(self, request):
-        form = TaklifForm()
-
-        context = {
-            'form':form,
-        }
-        return render(request, 'ovoz/taklif_kiritish.html', context)
-    
-    def post(self, request):
-        form = TaklifForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/taklif/')
+    context = {
+        'kiritilgan':kiritilgan,
+        'baholangan':baholangan,
+    }
+    return render(request, 'ovoz/taklif.html', context)
 
 
-        context = {
-            'form':form,
-        }
-        return render(request, 'ovoz/taklif_kiritish.html', context)
+@csrf_exempt
+def taklif_kiritish(request):
+    try:
+        if request.method == 'POST':
+            name = request.POST['name']
+            nomzod = request.POST['nomzod']
+            vaqt = request.POST['vaqt']
+            data = Taklif.objects.create(name=name, nomzod=nomzod, vaqt=vaqt)
+            data.save()
+            return redirect('/taklif/')                
+            
+        return render(request, 'ovoz/taklif_kiritish.html')
+    except:                
+        return render(request, 'ovoz/404.html')
     
-class AzoView(View):
-    def get(self, request):
-        try:
-            data = User.objects.filter(lavozim='azo')
-        except:
-            data = ''
 
-        context = {
-            'data':data,
-        }
-        return render(request, 'ovoz/azolar.html', context)
+@csrf_exempt   
+def azolar(request):
+    try:
+        data = User.objects.filter(lavozim='azo')
+    except:
+        data = ''
+
+    context = {
+        'data':data,
+    }
+    return render(request, 'ovoz/azolar.html', context)
+
     
-    
+
+@csrf_exempt
 def taklif_yoqish(request, pk):
     try:
         bugun = datetime.now()
@@ -284,7 +218,7 @@ def taklif_yoqish(request, pk):
 
 
 
-
+@csrf_exempt
 def taklif_ochirish(request, pk):
     try:
         data = Taklif.objects.get(id=pk)
@@ -299,33 +233,34 @@ def taklif_ochirish(request, pk):
 
     
 
-        
-class TakliflarAzoView(View):
-    def get(self, request):
-        try:
-            bugun = datetime.today()
-            data = Taklif.objects.filter(yoqish=True).filter(tugash=False)
-            for d in data:
-                tugash = f'{d.tugash_vaqti}'
-                sana = f'{bugun}'
-                if tugash[:16] <= sana[:16]:
-                    taklif = Taklif.objects.get(id=d.id)
-                    taklif.tugash = True
-                    taklif.save()
-                    print('bajarildi')
-                else:
-                    print('bajarilmadi')
+def taklif_azo(request):
+    try:
+        bugun = datetime.today()
+        data = Taklif.objects.filter(yoqish=True).filter(tugash=False)
+        for d in data:
+            tugash = f'{d.tugash_vaqti}'
+            sana = f'{bugun}'
+            if tugash[:16] <= sana[:16]:
+                taklif = Taklif.objects.get(id=d.id)
+                taklif.tugash = True
+                taklif.save()
+                print('bajarildi')
+            else:
+                print('bajarilmadi')
                 
-        except:
-            data = ''
-            print('except')
+    except:
+        data = ''            
 
-        context = {
-            'data':data,
-        }
-        return render(request, 'ovoz/taklif_azo.html', context)
-        
+    context = {
+        'data':data,
+    }
+    return render(request, 'ovoz/taklif_azo.html', context)
 
+
+ 
+
+
+@csrf_exempt
 def roziman(request, pk):
     try:
         taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
@@ -349,6 +284,7 @@ def roziman(request, pk):
         return render(request, 'xato/404.html')
 
 
+@csrf_exempt
 def qarshiman(request, pk):
     try:
         taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
@@ -371,6 +307,10 @@ def qarshiman(request, pk):
     except:
         return render(request, 'xato/404.html')
     
+
+
+
+@csrf_exempt
 def betarafman(request, pk):
     try:
         taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
@@ -394,25 +334,26 @@ def betarafman(request, pk):
         return render(request, 'xato/404.html')
 
 
-    
 
-class DavomatView(View):
-    def get(self, request):
-        try:   
-            borlar = Davomat.objects.filter(aktiv=True)
-            yoqlar = Davomat.objects.filter(aktiv=False)            
+@csrf_exempt 
+def davomat(request):
+    try:   
+        borlar = Davomat.objects.filter(aktiv=True)
+        yoqlar = Davomat.objects.filter(aktiv=False)            
             
-        except:            
-            borlar = ''
-            yoqlar = ''
-        context = {
+    except:            
+        borlar = ''
+        yoqlar = ''
+    context = {
             'borlar':borlar,
             'yoqlar':yoqlar,
-        }
-        return render(request, 'ovoz/davomat.html', context)
+    }
+    return render(request, 'ovoz/davomat.html', context)  
+
+
     
     
-    
+@csrf_exempt   
 def bor(request, pk):
     try:       
         Davomat.objects.filter(id=pk).update(aktiv=True)         
@@ -422,7 +363,7 @@ def bor(request, pk):
         return render(request, "xato/404.html")   
     
 
-
+@csrf_exempt
 def yoq(request, pk):
     try:       
         Davomat.objects.filter(id=pk).update(aktiv=False)        
@@ -433,7 +374,7 @@ def yoq(request, pk):
 
 
     
-
+@csrf_exempt
 def davomat_yangilash(request):
     try:
         user = User.objects.filter(lavozim='azo')
