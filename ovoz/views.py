@@ -21,11 +21,13 @@ from .models import Taklif, Statistika, Baxo
 def diyogramma(request, pk):
     data = Statistika.objects.filter(id=pk)
     for d in data:
-        rozi = int(d.rozilar)
-        qarshi = int(d.qarshilar)   
+        rozilar = int(d.rozilar)
+        qarshilar = int(d.qarshilar) 
+        betaraflar = int(d.betaraflar) 
+        qatnashmaganlar = int(d.qatnashmaganlar) 
     
-        labels = ['rozilar', 'qarshilar', 'betaraf', 'qatnashmadi']
-        sizes = [rozi, qarshi, 5, 10]
+        labels = ['rozilar', 'qarshilar', 'betaraflar', 'qatnashmaganlar']
+        sizes = [rozilar, qarshilar, betaraflar, qatnashmaganlar]
 
         fig, ax = plt.subplots()
         ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
@@ -115,6 +117,8 @@ def azo_qoshish(request):
         return HttpResponse('Azo qo`shilmadi')
 
 
+
+@csrf_exempt
 def stistika_yangilanishi(request):
     try:
         baxo = Baxo.objects.all()
@@ -149,11 +153,9 @@ def stistika_yangilanishi(request):
 def statistika(request):
     try:
         data = Statistika.objects.all()
-
                 
     except:
-        data = ''
-       
+        data = ''    
 
        
     context = {
