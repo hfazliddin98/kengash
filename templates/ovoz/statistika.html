@@ -144,15 +144,18 @@
       <div class="container-fluid py-2">
         <h1 class="h2 mb-0 text-center"> Barcha takliflar statistikasi</h1>
       </div>
+      <span>
+        <a href="{% url 'stistika_yangilanishi' %}">Yangilash</a>
+      </span>
     </header>
     <section>
       <div class="container-fluid">
-        <div class="row">
+        <div class="row">         
           {% for d in data %}
           <div class="col-lg-6">
             <div class="card">
               <div class="card-header border-bottom">
-                <h4>{{d.elon.name}}</h4>
+                <h4>{{d.taklif_id.name}}</h4>
               </div>
               <div class="card-body">
 

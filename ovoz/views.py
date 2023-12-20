@@ -115,21 +115,20 @@ def azo_qoshish(request):
         return HttpResponse('Azo qo`shilmadi')
 
 
-@csrf_exempt
-def statistika(request):
+def stistika_yangilanishi(request):
     try:
         baxo = Baxo.objects.all()
         if baxo:
             for b in baxo:
                 static = Statistika.objects.filter(taklif_id=b.taklif_id)
                 if static:
-                    Statistika.objects.filter(taklif_id =b.taklif_id).update(                            
-                            rozilar="0",
-                            qarshilar = "0",
-                            betaraflar = "0",
-                            qatnashmaganlar = "0"
+                    Statistika.objects.filter(taklif_id=b.taklif_id).update(                            
+                            rozilar="10",
+                            qarshilar = "10",
+                            betaraflar = "10",
+                            qatnashmaganlar = "10"
                         )                        
-                    return render(request, 'ovoz/statistika.html')
+                    return redirect("/statistika/")
                 else:                   
                     data = Statistika.objects.create(
                         taklif_id =b.taklif_id,
@@ -139,14 +138,28 @@ def statistika(request):
                         qatnashmaganlar = "0"
                     )
                     data.save()
-                    return render(request, 'ovoz/statistika.html')
+                    return redirect("/statistika/")
+    except:
+        return render(request, 'xato/404.html')
+                
+
+
+
+@csrf_exempt
+def statistika(request):
+    try:
+        data = Statistika.objects.all()
+
                 
     except:
-        return render(request, 'xato/404.html')     
+        data = ''
+       
 
        
-      
-    return render(request, 'ovoz/statistika.html')
+    context = {
+        'data':data,
+    }
+    return render(request, 'ovoz/statistika.html', context)
 
 
 @csrf_exempt
