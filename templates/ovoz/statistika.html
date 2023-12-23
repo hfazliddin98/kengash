@@ -154,15 +154,18 @@
           {% for d in data %}
           <div class="col-lg-6">
             <div class="card">
+              
               <div class="card-header border-bottom">
-                <h4>{{d.taklif_id.name}}</h4>
+                <h4>{{d.taklif_id}}</h4>
               </div>
               <div class="card-body">
 
                 <img class="w-100" src="{% url 'diyogramma' d.pk %}" alt="Pie Chart">
-                <p>Rozilar 54</p>
-
-                <canvas id="lineChartExample"></canvas>
+                <p>Rozilar {{d.rozilar}}</p>
+                <p>Qarshilar {{d.qarshilar}}</p>
+                <p>Befarqlar {{d.betaraflar }}</p>
+                <p>Qatnamshmaganlar {{d.rozilar}}</p>
+                                
               </div>
             </div>
 

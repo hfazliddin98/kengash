@@ -30,7 +30,7 @@ def diyogramma(request, pk):
         sizes = [rozilar, qarshilar, betaraflar, qatnashmaganlar]
 
         fig, ax = plt.subplots()
-        ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
+        ax.pie(sizes, autopct='%1.1f%%', startangle=140)
         ax.axis('equal')
 
         buf = io.BytesIO()
@@ -116,34 +116,73 @@ def azo_qoshish(request):
     except:
         return HttpResponse('Azo qo`shilmadi')
 
+@csrf_exempt
+def rozilar_soni(pk):
+    baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="roziman").all()    
+    son = 0
+    for b in baxo:
+        son += 1
+    return son
 
+@csrf_exempt
+def qarshilar_soni(pk):
+    baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="qarshiman").all()    
+    son = 0
+    for b in baxo:
+        son += 1
+    return son
+
+@csrf_exempt
+def betaraflar_soni(pk):
+    baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="betarafman").all()    
+    son = 0
+    for b in baxo:
+        son += 1
+    return son
+
+@csrf_exempt
+def qatnashmaganlar_soni(pk):
+    baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="roziman").all()    
+    son = 0
+    for b in baxo:
+        son += 1
+    return son
 
 @csrf_exempt
 def stistika_yangilanishi(request):
     try:
         baxo = Baxo.objects.all()
         if baxo:
-            for b in baxo:
+            for b in baxo:            
                 static = Statistika.objects.filter(taklif_id=b.taklif_id)
-                if static:
-                    Statistika.objects.filter(taklif_id=b.taklif_id).update(                            
-                            rozilar="10",
-                            qarshilar = "10",
-                            betaraflar = "10",
-                            qatnashmaganlar = "10"
+                taklif = Taklif.objects.get(id=b.taklif_id)    
+                if static:                    
+                    Statistika.objects.filter(taklif_id=b.taklif_id).update(  
+                            name = taklif.name,
+                            nomzod = taklif.nomzod,                          
+                            rozilar=int(rozilar_soni(b.taklif_id)),
+                            qarshilar = int(qarshilar_soni(b.taklif_id)),
+                            betaraflar = int(betaraflar_soni(b.taklif_id)),
+                            qatnashmaganlar = int(qatnashmaganlar_soni(b.taklif_id))
                         )                        
                     return redirect("/statistika/")
-                else:                   
+                else:                               
                     data = Statistika.objects.create(
                         taklif_id =b.taklif_id,
-                        rozilar="0",
-                        qarshilar = "0",
-                        betaraflar = "0",
-                        qatnashmaganlar = "0"
+                        name = taklif.name,
+                        nomzod = taklif.nomzod,
+                        rozilar=int(rozilar_soni(b.taklif_id)),
+                        qarshilar = int(qarshilar_soni(b.taklif_id)),
+                        betaraflar = int(betaraflar_soni(b.taklif_id)),
+                        qatnashmaganlar = int(qatnashmaganlar_soni(b.taklif_id))
                     )
                     data.save()
                     return redirect("/statistika/")
+        else:
+            return HttpResponse("<h1>Hozirda baxolangan takliflar mavjud emas</h1>")
+
     except:
+       
         return render(request, 'xato/404.html')
                 
 
@@ -153,10 +192,37 @@ def stistika_yangilanishi(request):
 def statistika(request):
     try:
         data = Statistika.objects.all()
+        taklif = Taklif.objects.filter(yoqish=True)
+        if taklif:
+            for t in taklif:
+                data = Statistika.objects.create(
+                    taklif_id =t.taklif_id,
+                    name = t.name,
+                    nomzod = t.nomzod,
+                    rozilar="0",
+                    qarshilar = '0',
+                    betaraflar = '0',
+                    qatnashmaganlar = '0'
+                )
+                data.save()
+                return HttpResponse('Create qilindi')
+                # return redirect('/statistika/')
+        else:
+            for t in taklif:
+                Statistika.objects.filter(taklif_id=t.taklif_id).update(  
+                                name = taklif.name,
+                                nomzod = taklif.nomzod,                          
+                                rozilar=int(rozilar_soni(t.taklif_id)),
+                                qarshilar = int(qarshilar_soni(t.taklif_id)),
+                                betaraflar = int(betaraflar_soni(t.taklif_id)),
+                                qatnashmaganlar = int(qatnashmaganlar_soni(t.taklif_id))
+                            )                        
+                return HttpResponse('Update')
+
+            # return redirect('/statistika/')
                 
     except:
         data = ''    
-
        
     context = {
         'data':data,
@@ -240,14 +306,40 @@ def taklif_ochirish(request, pk):
         data.boshlanish_vaqti = ''
         data.tugash_vaqti = ''
         data.yoqish = False
+        data.xal = False
         data.save()
         return redirect('/taklif/')
         
     except:
         return render(request, "xato/404.html")
-
     
 
+
+@csrf_exempt
+def xal_qilish(request, pk):    
+    try:        
+        xal = Taklif.objects.filter(id=pk).filter(xal=True)
+        if xal:
+            xabar = "Bu taklif xal bo`lgan"
+            context = {
+                'xabar':xabar,
+            }
+            return render(request, 'xato/malumot.html', context)
+        else:
+            data = Taklif.objects.get(id=pk)        
+            data.xal = True
+            data.save()
+            xabar = "Bu taklif xal bo`ldi"
+            context = {
+                'xabar':xabar,
+            }
+            return render(request, 'xato/malumot.html', context)
+        
+    except:
+        return render(request, "xato/404.html")
+
+    
+@csrf_exempt
 def taklif_azo(request):
     try:
         bugun = datetime.today()

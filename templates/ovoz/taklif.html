@@ -173,7 +173,7 @@
                   <div class="ms-2 me-auto">
                     <div class="fw-bold">{{k.vaqt}}:00 {{k.name}} {{k.nomzod}}</div>
                   </div>
-                  <a href="{% url 'yoqish' k.pk %}" class="btn btn-primary rounded-2">yoqish</a>
+                  <a href="{% url 'yoqish' k.pk %}" class="btn btn-primary rounded-2">yoqish</a>                  
                 </li>
                 {% endfor %}
               </ol>
@@ -198,6 +198,7 @@
                     <div class="fw-bold">{{b.vaqt}}:00 {{b.name}} {{b.nomzod}}</div>
                   </div>
                   <a href="{% url 'ochirish' b.pk %}" class="btn btn-primary rounded-2">ochirish</a>
+                  <a href="{% url 'xal_qilish' b.pk %}" class="btn btn-primary rounded-2">xal_qilish</a>
                 </li>
                 {% endfor %}
               </ol>

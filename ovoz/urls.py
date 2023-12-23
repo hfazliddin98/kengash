@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from .views import taklif_kiritish, taklif, azolar, taklif_azo, davomat, bor, yoq, stistika_yangilanishi
-from .views import davomat_yangilash, taklif_yoqish, taklif_ochirish, statistika
+from .views import davomat_yangilash, taklif_yoqish, taklif_ochirish, statistika, xal_qilish
 from .views import diyogramma, roziman, qarshiman, betarafman, kirish, home, azo_qoshish
 
 
@@ -25,4 +25,5 @@ urlpatterns = [
     path('bor/<int:pk>/', bor, name='bor'),
     path('yoq/<int:pk>/', yoq, name='yoq'),
     path('davomat_yangilash/', davomat_yangilash, name='davomat_yangilash'),
+    path('xal_qilish/<int:pk>/', xal_qilish, name='xal_qilish'),
 ]
