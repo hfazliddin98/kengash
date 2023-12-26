@@ -27,3 +27,4 @@ class Statistika(models.Model):
     qarshilar = models.IntegerField(default=0)
     betaraflar = models.IntegerField(default=0)
     qatnashmaganlar = models.IntegerField(default=0)
+    xal = models.BooleanField(default=False)

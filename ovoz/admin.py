@@ -8,7 +8,7 @@ class TaklifAdmin(admin.ModelAdmin):
 
 @admin.register(Statistika)
 class StatistikaAdmin(admin.ModelAdmin):
-    list_display = ['id']
+    list_display = ['id','taklif_id', 'xal']
 
 @admin.register(Baxo)
 class BaxoAdmin(admin.ModelAdmin):
