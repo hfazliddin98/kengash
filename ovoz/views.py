@@ -113,42 +113,11 @@ def azo_qoshish(request):
     except:
         return HttpResponse('Azo qo`shilmadi')
 
-# @csrf_exempt
-# def rozilar_soni(pk):
-#     baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="roziman").all()    
-#     son = 0
-#     for b in baxo:
-#         son += 1
-#     return son
-
-# @csrf_exempt
-# def qarshilar_soni(pk):
-#     baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="qarshiman").all()    
-#     son = 0
-#     for b in baxo:
-#         son += 1
-#     return son
-
-# @csrf_exempt
-# def betaraflar_soni(pk):
-#     baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="betarafman").all()    
-#     son = 0
-#     for b in baxo:
-#         son += 1
-#     return son
-
-# @csrf_exempt
-# def qatnashmaganlar_soni(pk):
-#     baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="roziman").all()    
-#     son = 0
-#     for b in baxo:
-#         son += 1
-#     return son
 
 @csrf_exempt
 def stistika_yangilanishi(request):
     try:
-        taklif = Taklif.objects.filter(yoqish=True)
+        taklif = Taklif.objects.filter(tugash=True)
         if taklif:
             for t in taklif:
                 statistika = Statistika.objects.filter(taklif_id=t.id)
@@ -175,7 +144,7 @@ def stistika_yangilanishi(request):
             return redirect('/statistika/')
                 
         else:
-            xabar = "Hozirda ko`rilayotgan takliflar mavjud emas"
+            xabar = "Hozirda takliflar statistikasi shakilanmoqda"
             context = {
                 "xabar":xabar,
             }
@@ -189,8 +158,8 @@ def stistika_yangilanishi(request):
 
 @csrf_exempt
 def statistika(request):
-    try:
-        data = Statistika.objects.all()        
+    try:        
+        data = Statistika.objects.all()       
                 
     except:
         data = ''    
@@ -205,8 +174,7 @@ def statistika(request):
 def taklif(request):
     try:
         kiritilgan = Taklif.objects.filter(yoqish=False)
-        baholangan = Taklif.objects.filter(yoqish=True).filter(tugash=False)
-                
+        baholangan = Taklif.objects.filter(yoqish=True).filter(tugash=False)                
                 
     except:
         kiritilgan = ''
@@ -352,9 +320,7 @@ def taklif_azo(request):
                 taklif = Taklif.objects.get(id=d.id)
                 taklif.tugash = True
                 taklif.save()
-                print('bajarildi')
-            else:
-                print('bajarilmadi')
+            
                 
     except:
         data = ''            
@@ -364,6 +330,17 @@ def taklif_azo(request):
     }
     return render(request, 'ovoz/taklif_azo.html', context)
 
+
+@csrf_exempt
+def taklif_azo_baxolash(request, pk):
+    try:
+        d = pk
+    except:
+        d=1
+    context = {
+        "d":d
+    }
+    return render(request, 'ovoz/taklif_azo_baxolash.html', context)
 
  
 

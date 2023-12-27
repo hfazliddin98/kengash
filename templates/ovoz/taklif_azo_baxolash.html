@@ -25,7 +25,7 @@
 
   <body>
     {% if user.is_authenticated %}
-      {% if user.lavozim == 'azo' %} 
+      {% if user.lavozim == 'azo' %}
 
         <!-- Side Navbar -->
         <nav class="side-navbar">
@@ -114,28 +114,53 @@
             </div>
           </header>
 
+          
           <section>
-            <div class="d-flex flex-column gap-3 container-fluid py-4">
-
-              {% for d in data %}
-                <!-- Items -->
-                <div class="row">
-                    <div class="w-100 h-100 clo-12 d-flex flex-column flex-md-row justify-content-between align-items-center gap-4 bg-body-secondary px-4 py-2">
-                        <div class="d-flex flex-column flex-md-row gap-4">
-                            <p class="m-0"><b>Raqami: </b>{{d.id}}</p>
-                            <p class="m-0"><b>Taklif nomi: </b>
-                              {{d.name}}
-                            </p>
+            <div class="container-fluid">
+                <div class="row py-5">
+                    
+                    <!-- Item -->
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body rounded">
+                                <!-- Time -->
+                                <div class="timer d-flex align-items-center justify-content-between taklif">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <p class="remainingTime h2">Berilgan vaqt</p>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center h2">
+                                        <span class="minutes-number"></span>
+                                        <span class="countdown-label">:</span>
+                                        <span class="seconds-number"></span>
+                                    </div>
+                                </div>    
+                                <!-- /Time -->
+                                <div class="d-flex align-items-end flex-column px-5 taklif" style="min-height: 200px;">
+                                    <!-- Vaqt kelish -->
+                                    <p id="p-tegi" class="d-none ">2</p>
+                                    <!-- /Vaqt kelish -->
+                                    <div>
+                                        <div class="" style="min-height: 100px;"><h5 class="d-inline">Taklif:</h5> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis numquam distinctio neque nam ad, dolor illo aliquid mollitia earum minus architecto ratione incidunt maiores, sunt ab blanditiis velit quasi aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore totam, soluta inventore voluptas perspiciatis illo itaque eaque numquam nisi vitae maxime, suscipit dolorem harum qui fugit consectetur at quibusdam dolor?</div>
+                                        <p class="card-text px-2"><h5 class="d-inline">Nomzod:</h5> Hatamov Fazliddinni tayinlash</p>
+                                    </div>
+                                    <div class="d-flex justify-content-end align-items-center w-100 my-auto">
+                                        <a href="{% url 'roziman' d %}" style="width: 110px;"
+                                        class="btn btn-primary rounded-2 mx-2">Roziman</a>
+                                        <a href="{% url 'qarshiman' d %}" style="width: 110px;"
+                                        class="btn btn-danger rounded-2 mx-2">Qarshiman</a>
+                                        <a href="{% url 'betarafman' d %}" style="width: 110px;"
+                                        class="btn btn-yellow rounded-2 mx-2">Betarafman</a>
+                                    </div>
+                                </div>                                            
+                            </div>
                         </div>
-                        <a href="{% url 'taklif_azo_baxolash' d.id %}" class="btn btn-success ">Baxolash</a>
                     </div>
-                </div>              
-              {% endfor %}
+
+                </div>
             </div>
-          </section>         
+        </section>
 
           
-
           <footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2" style="background: #222">
             <div class="container-fluid">
                 <div class="row text-center gy-3">
