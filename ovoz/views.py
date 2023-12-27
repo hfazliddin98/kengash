@@ -65,7 +65,10 @@ def home(request):
             azolar = User.objects.filter(lavozim='azo')
             azo_soni = azolar.__len__
             elonlar = Taklif.objects.all()
-            elonlar_soni = elonlar.__len__
+            if elonlar:
+                elonlar_soni = elonlar.__len__
+            else:
+                elonlar_soni = "0"
             aktivlar = Taklif.objects.filter(yoqish=False)
             aktivlar_soni = aktivlar.__len__
             baholangan = Taklif.objects.filter(yoqish=True)
