@@ -1,30 +1,27 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ma`lumotlar</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="all,follow">
-  <!-- Google fonts - Roboto -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-  <!-- Choices CSS-->
-  <link rel="stylesheet" href="{% static '/vendor/choices.js/public/assets/styles/choices.min.css' %}">
-  <!-- Custom Scrollbar-->
-  <link rel="stylesheet" href="{% static '/vendor/overlayscrollbars/css/OverlayScrollbars.min.css' %}">
-  <!-- theme stylesheet-->
-  <link rel="stylesheet" href="{% static '/css/style.default.css' %}" id="theme-stylesheet">
-  <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- Custom stylesheet - for your changes-->
-  <link rel="stylesheet" href="{% static '/css/custom.css' %}">
-  <!-- Favicon-->
-  <link rel="shortcut icon" href="{% static '/img/favicon.ico' %}">
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="QDPI Kengashi" />
+    <meta name="author" content="Meliboev Azimjon, Hatamov Fazliddin">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="all,follow" />
+    <title>Kirish</title>
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static '/img/logo_kspi.png' %}" />
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <!-- Choices CSS-->
+    <link rel="stylesheet" href="{% static '/vendor/choices.js/public/assets/styles/choices.min.css' %}" />
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="{% static '/vendor/overlayscrollbars/css/OverlayScrollbars.min.css' %}" />
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static '/css/style.default.css' %}" id="theme-stylesheet" />
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static '/css/custom.css' %}" />
+  </head>
 
 <body>
   {% if user.is_authenticated %}
@@ -218,29 +215,11 @@
 
   <!-- JavaScript files-->
   <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static '/vendor/chart.js/Chart.min.js' %}"></script>
   <script src="{% static '/vendor/just-validate/js/just-validate.min.js' %}"></script>
   <script src="{% static '/vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
   <script src="{% static '/vendor/overlayscrollbars/js/OverlayScrollbars.min.js' %}"></script>
-  <script src="{% static '/js/charts-custom.js' %}"></script>
   <!-- Main File-->
-  <script src="{% static '/js/front.js' %}"></script>
-  <script>
-    function injectSvgSprite(path) {
-
-      var ajax = new XMLHttpRequest();
-      ajax.open("GET", path, true);
-      ajax.send();
-      ajax.onload = function (e) {
-        var div = document.createElement("div");
-        div.className = 'd-none';
-        div.innerHTML = ajax.responseText;
-        document.body.insertBefore(div, document.body.childNodes[0]);
-      }
-    }
-    injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
-
-  </script>
+  <script src="{% static '/js/front.js' %}"></script>   
 
 </body>
 

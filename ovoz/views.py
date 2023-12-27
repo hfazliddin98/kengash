@@ -225,14 +225,19 @@ def taklif_kiritish(request):
         if request.method == 'POST':
             name = request.POST['name']
             nomzod = request.POST['nomzod']
-            vaqt = request.POST['vaqt']
+            vaqt = request.POST['vaqt']            
             data = Taklif.objects.create(name=name, nomzod=nomzod, vaqt=vaqt)
             data.save()
-            return redirect('/taklif/')                
+            return redirect('/taklif/')  
+                        
             
         return render(request, 'ovoz/taklif_kiritish.html')
-    except:                
-        return render(request, 'ovoz/404.html')
+    except: 
+        xabar = "Kerakli maydonlar to`g`ri to`ldirilmadi"
+        context = {
+            'xabar':xabar
+        }              
+        return render(request, 'xato/malumot.html', context)
     
 
 @csrf_exempt   

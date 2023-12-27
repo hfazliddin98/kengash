@@ -30,178 +30,137 @@
         <!-- Side Navbar -->
         <nav class="side-navbar">
           <div class="side-navbar-inner">
-            <!-- Sidebar Header    -->
-            <div class="sidebar-header d-flex align-items-center justify-content-center p-3 mb-3">
-              <!-- User Info-->
-              <div class="sidenav-header-inner text-center"><img class="img-fluid rounded-circle avatar mb-3"
-                src="{% static '/img/icon-user.png' %}" alt="person">
-                <h2 class="h5 text-white text-uppercase mb-0">{{user.username}}</h2>
-                <p class="text-sm mb-0 text-muted">admin</p>
+              <!-- Sidebar Header    -->
+              <div class="sidebar-header d-flex align-items-center justify-content-center p-3 mb-3">
+                  <!-- User Info-->
+                  <div class="sidenav-header-inner text-center">
+                      <img class="img-fluid rounded-circle avatar mb-3" src="{% static '/img/icon-user.png' %}" alt="person">
+                      <!-- Ismi -->
+                      <h2 class="h5 text-white text-uppercase mb-0">{{user.username}}</h2>
+                  </div>
+                  <!-- Small Brand information, appears on minimized sidebar--><a class="brand-small text-center" href="{% url 'home' %}">
+                      <p class="h1 m-0">QDPI</p></a>
               </div>
-              <!-- Small Brand information, appears on minimized sidebar--><a class="brand-small text-center"
-              href="{% url 'home' %}">
-              <p class="h1 m-0">QDPI</p>
-            </a>
+              <!-- Sidebar Navigation Menus-->
+              <span class="text-uppercase text-gray-500 text-sm fw-bold letter-spacing-0 mx-lg-2 heading">Asosiy</span>
+              <ul class="list-unstyled">                  
+                  <li class="sidebar-item ">
+                      <a class="sidebar-link bg-success" href="{% url 'home' %}"> 
+                          <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                              <use xlink:href="#real-estate-1"> </use>
+                          </svg>
+                          Asosiy
+                      </a>
+                  </li>
+                  <li class="sidebar-item"><a class="sidebar-link" href="{% url 'azolar' %}"> 
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                          <use xlink:href="#survey-1"> </use>
+                      </svg>A'zolar</a>
+                  </li>
+                  <li class="sidebar-item"><a class="sidebar-link" href="{% url 'davomat' %}"> 
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                          <use xlink:href="#sales-up-1"> </use>
+                      </svg>Davomat</a>
+                  </li>
+                  <li class="sidebar-item"><a class="sidebar-link " href="{% url 'taklif' %}"> 
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                          <use xlink:href="#portfolio-grid-1"> </use>
+                      </svg>Takliflar </a>
+                  </li>
+                  <li class="sidebar-item"><a class="sidebar-link" href="{% url 'statistika' %}"> 
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                          <use xlink:href="#disable-1"> </use>
+                      </svg>Statistika</a>
+                  </li>
+              </ul>
           </div>
-          <!-- Sidebar Navigation Menus-->
-          <span class="text-uppercase text-gray-500 text-sm fw-bold letter-spacing-0 mx-lg-2 heading">Asosiy</span>
-          <ul class="list-unstyled">                  
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'home' %}"> 
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
-                  <use xlink:href="#real-estate-1"> </use>
-                </svg>
-                Asosiy 
-              </a>
-            </li>
-            
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'azolar' %}"> 
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
-                  <use xlink:href="#quality-1"> </use>
-                </svg>
-                Azolar 
-              </a>
-            </li> 
-            
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'davomat' %}">
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
-                  <use xlink:href="#quality-1"> </use>
-                </svg>
-                Davomat
-              </a>
-            </li>
-            
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'taklif' %}"> 
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
-                  <use xlink:href="#portfolio-grid-1"> </use>
-                </svg>
-                Takliflar
-              </a>
-            </li>
-            
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 'statistika' %}"> 
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
-                  <use xlink:href="#sales-up-1"> </use>
-                </svg>
-                Statistika 
-              </a>
-            </li>
-            
-          </ul>
-        </div>
         </nav>
+
         <div class="page">
-      <!-- navbar-->
-      <header class="header mb-5 pb-3">
-        <nav class="nav navbar fixed-top">
-          <div class="container-fluid">
-            <div class="d-flex align-items-center justify-content-between w-100">
-              
-              <div class="d-flex align-items-center">
-                <a class="menu-btn d-flex align-items-center justify-content-center p-2 bg-gray-900" id="toggle-btn"
-                href="#">
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-white">
-                  <use xlink:href="#menu-1"> </use>
-                </svg></a><a class="navbar-brand ms-2" href="{% url 'home' %}">
-                  <div class="brand-text d-none d-md-inline-block text-uppercase letter-spacing-0">
-                    <strong class="text-primary text-sm">QDPI kengashi</strong>
+          <header class="style-heder-w header pb-3">
+            <nav class="nav navbar fixed-top bg-white px-4">
+                <div class="d-flex align-items-center w-100">
+                    <div class="w-100 d-flex align-items-center">
+                        <a class="menu-btn d-flex align-items-center justify-content-center p-2" id="toggle-btn">
+                            <img width="25px" src="{% static '/img/icon-menu.png' %}" alt="">
+                        </a>
+                        <ul class="w-100 nav-menu mb-0 list-unstyled d-flex justify-content-between flex-md-row align-items-center">
+                            <!-- Notifications dropdown-->
+                            <li class="ms-4">
+                                <div class="px-md-1 px-lg-3 d-none d-md-inline-block">
+                                    <a class="navbar-brand d-flex align-items-center gap-3 style-loge-text" href="{% url 'home' %}">
+                                        <img class="style-w-logo mb-2" src="{% static '/img/logo_kspi.png' %}"alt="Logo"/>
+                                        QDPI Kengash
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}" class="btn btn-success costom-btn-border-radius costom-btn-respanse">
+                                CHIQISH
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+          </header>
+          <!-- Counts Section -->
+          <section class="py-5">
+            <div class="container-fluid">
+              <div class="row">
+                <!-- Count item widget -->
+                <div class="col-12 col-md-6 col-lg-3 text-center gy-4 gy-xl-0">
+                  <div class="d-flex justify-content-center">
+                    <div class="ms-2">
+                      <h3 class="h4 text-dark text-uppercase fw-normal style-white-scope">A'ZOLAR</h3>
+                      <p class="display-6 mb-0">{{azo_soni}}</p>
+                    </div>
                   </div>
-                </a>
-              </div>
-              
-              <ul class="nav-menu mb-0 list-unstyled d-flex flex-md-row align-items-md-center">
-                <!-- Log out-->
-                <li class="nav-item"><a class="nav-link text-white text-sm ps-0" href="{% url 'logout' %}"> <span
-                  class="d-none d-sm-inline-block">Chiqish</span>
-                  <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                    <use xlink:href="#security-1"> </use>
-                  </svg></a></li>
-                </ul>
+                </div>
+                <!-- Count item widget-->
+                <div class="col-12 col-md-6 col-lg-3 text-center gy-4 gy-xl-0">
+                  <div class="d-flex justify-content-center">
+                    <div class="ms-2">
+                      <h3 class="h4 text-dark text-uppercase fw-normal style-white-scope">BARCHA TAKLIFLAR</h3>
+                      <p class="display-6 mb-0">{{elonlar_soni}}</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Count item widget-->
+                <div class="col-12 col-md-6 col-lg-3 text-center gy-4 gy-xl-0">
+                  <div class="d-flex justify-content-center">
+                    <div class="ms-2">
+                      <h3 class="h4 text-dark text-uppercase fw-normal style-white-scope">YANGI TAKLIFLAR</h3>
+                      <p class="display-6 mb-0">{{aktivlar_soni}}</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Count item widget-->
+                <div class="col-12 col-md-6 col-lg-3 text-center gy-4 gy-xl-0">
+                  <div class="d-flex justify-content-center">
+                    <div class="ms-2">
+                      <h3 class="h4 text-dark text-uppercase fw-normal style-white-scope">BAHOLANGAN TAKLIFLAR</h3>
+                      <p class="display-6 mb-0">{{baholangan_soni}}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </nav>
-        </header>
-        <!-- Counts Section -->
-        <section class="py-5">
-          <div class="container-fluid">
-            <div class="row">
-              
-              <!-- Count item widget-->
-              <div class="col-xl-3 col-md-4 col-6 gy-4 gy-xl-0">
-                <div class="d-flex">
-                  <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
-                    <use xlink:href="#user-1"> </use>
-                  </svg>
-                  <div class="ms-2">
-                    <h3 class="h4 text-dark text-uppercase fw-normal">Azolar </h3>
-                    <p class="text-gray-500 small">Last 7 days</p>
-                    <p class="display-6 mb-0">{{azo_soni}} </p>
-                  </div>
-                </div>
-              </div>
-              <!-- Count item widget-->
-              <div class="col-xl-3 col-md-4 col-6 gy-4 gy-xl-0">
-                <div class="d-flex">
-                  <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
-                    <use xlink:href="#survey-1"> </use>
-                  </svg>
-                  <div class="ms-2">
-                    <h3 class="h4 text-dark text-uppercase fw-normal">Barcha takliflar</h3>
-                    <p class="text-gray-500 small">Last 5 days</p>
-                    <p class="display-6 mb-0">{{elonlar_soni}}</p>
-                  </div>
-                </div>
-              </div>
-              <!-- Count item widget-->
-              <div class="col-xl-3 col-md-4 col-6 gy-4 gy-xl-0">
-                <div class="d-flex">
-                  <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
-                    <use xlink:href="#list-details-1"> </use>
-                  </svg>
-                  <div class="ms-2">
-                    <h3 class="h4 text-dark text-uppercase fw-normal">Yangi takliflar</h3>
-                    <p class="text-gray-500 small">Last 2 months</p>
-                    <p class="display-6 mb-0">{{aktivlar_soni}}</p>
-                  </div>
-                </div>
-              </div>
-              <!-- Count item widget-->
-              <div class="col-xl-3 col-md-4 col-6 gy-4 gy-xl-0">
-                <div class="d-flex">
-                  <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
-                    <use xlink:href="#numbers-1"></use>
-                  </svg>
-                  <div class="ms-2">
-                    <h3 class="h4 text-dark text-uppercase fw-normal">Baholangan takliflar</h3>
-                    <p class="text-gray-500 small">Last 2 days</p>
-                    <p class="display-6 mb-0">{{baholangan_soni}}</p>
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-        </section>
+          </section>          
         
         
-        <footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2" style="background: #222">
-          <div class="container-fluid">
-            <div class="row text-center gy-3">
-              <div class="col-sm-6 text-sm-start">
-                <p class="mb-0 text-sm text-gray-600">QDPI &copy; 2023</p>
-              </div>
-              <div class="col-sm-6 text-sm-end">
-                <a href="https://kspi.uz" class="external">
-                  <p class="mb-0 text-sm text-gray-600">kspi.uz </p>
-                </a>
-              </div>
+          <footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2" style="background: #222">
+            <div class="container-fluid">
+                <div class="row text-center gy-3">
+                    <div class="col-sm-6 text-sm-start">
+                        <p class="mb-0 text-sm text-gray-600">2023-2024 &copy;</p>
+                    </div>
+                    <div class="col-sm-6 text-sm-end">
+                        <p class="mb-0 text-sm text-gray-600"><a href="{% url 'home' %}">Kengash.kspi.uz</a></p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </footer>
+          </footer>
         </div>  
             
       {% elif user.lavozim == 'admin' %}
@@ -583,14 +542,6 @@
     <script src="{% static '/vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
     <script src="{% static '/vendor/overlayscrollbars/js/OverlayScrollbars.min.js' %}"></script>
     <!-- Main File-->
-    <script src="{% static '/js/front.js' %}"></script>
-    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
-    <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-    crossorigin="anonymous"
-    />
-      
+    <script src="{% static '/js/front.js' %}"></script>         
   </body>          
 </html>
