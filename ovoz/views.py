@@ -334,11 +334,16 @@ def taklif_azo(request):
 @csrf_exempt
 def taklif_azo_baxolash(request, pk):
     try:
+        data = Taklif.objects.filter(id=pk)
+        for d in data:            
+            vaqt=d.vaqt
         d = pk
     except:
         d=1
+        vaqt = 10000
     context = {
-        "d":d
+        "d":d,
+        "vaqt":vaqt
     }
     return render(request, 'ovoz/taklif_azo_baxolash.html', context)
 
@@ -348,21 +353,20 @@ def taklif_azo_baxolash(request, pk):
 @csrf_exempt
 def roziman(request, pk):
     try:
-        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
-        if taklif:
-            for t in taklif:
-                baxo = Baxo.objects.filter(taklif_id=t.id).filter(user_id=request.user.id)
-                if baxo:
-                    return render(request, 'xato/ovoz.html')
-                else:
-                    data = Baxo.objects.create(
-                        user_id = request.user.id ,
-                        taklif_id = t.id,
-                        baxo = "roziman"
-                    )
-                    data.save()
-                    
-                    return render(request, 'xato/200.html')   
+        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=False).filter(id=pk)
+        if taklif:            
+            baxo = Baxo.objects.filter(taklif_id=pk).filter(user_id=request.user.id)
+            if baxo:
+                return render(request, 'xato/ovoz.html')
+            else:
+                data = Baxo.objects.create(
+                    user_id = request.user.id ,
+                    taklif_id = pk,
+                    baxo = "roziman"
+                )
+                data.save()
+                
+                return render(request, 'xato/200.html')   
 
 
     except:
@@ -372,21 +376,20 @@ def roziman(request, pk):
 @csrf_exempt
 def qarshiman(request, pk):
     try:
-        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
-        if taklif:
-            for t in taklif:
-                baxo = Baxo.objects.filter(taklif_id=t.id).filter(user_id=request.user.id)
-                if baxo:
-                    return render(request, 'xato/ovoz.html')
-                else:
-                    data = Baxo.objects.create(
-                        user_id = request.user.id ,
-                        taklif_id = t.id,
-                        baxo = "qarshiman"
-                    )
-                    data.save()
-                    
-                    return render(request, 'xato/200.html')   
+        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=False).filter(id=pk)
+        if taklif:            
+            baxo = Baxo.objects.filter(taklif_id=pk).filter(user_id=request.user.id)
+            if baxo:
+                return render(request, 'xato/ovoz.html')
+            else:
+                data = Baxo.objects.create(
+                    user_id = request.user.id ,
+                    taklif_id = pk,
+                    baxo = "qarshiman"
+                )
+                data.save()
+                
+                return render(request, 'xato/200.html')           
 
 
     except:
@@ -398,21 +401,20 @@ def qarshiman(request, pk):
 @csrf_exempt
 def betarafman(request, pk):
     try:
-        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=True)
-        if taklif:
-            for t in taklif:
-                baxo = Baxo.objects.filter(taklif_id=t.id).filter(user_id=request.user.id)
-                if baxo:
-                    return render(request, 'xato/ovoz.html')
-                else:
-                    data = Baxo.objects.create(
-                        user_id = request.user.id ,
-                        taklif_id = t.id,
-                        baxo = "betarafman"
-                    )
-                    data.save()
-                    
-                    return render(request, 'xato/200.html')   
+        taklif = Taklif.objects.filter(yoqish=True).filter(tugash=False).filter(id=pk)
+        if taklif:            
+            baxo = Baxo.objects.filter(taklif_id=pk).filter(user_id=request.user.id)
+            if baxo:
+                return render(request, 'xato/ovoz.html')
+            else:
+                data = Baxo.objects.create(
+                    user_id = request.user.id ,
+                    taklif_id = pk,
+                    baxo = "betarafman"
+                )
+                data.save()
+                
+                return render(request, 'xato/200.html')         
 
 
     except:

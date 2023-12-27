@@ -137,10 +137,13 @@
                                 <!-- /Time -->
                                 <div class="d-flex align-items-end flex-column px-5 taklif" style="min-height: 200px;">
                                     <!-- Vaqt kelish -->
-                                    <p id="p-tegi" class="d-none ">2</p>
+                                    <p id="p-tegi" class="d-none ">{{vaqt}}</p>
                                     <!-- /Vaqt kelish -->
                                     <div>
-                                        <div class="" style="min-height: 100px;"><h5 class="d-inline">Taklif:</h5> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis numquam distinctio neque nam ad, dolor illo aliquid mollitia earum minus architecto ratione incidunt maiores, sunt ab blanditiis velit quasi aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore totam, soluta inventore voluptas perspiciatis illo itaque eaque numquam nisi vitae maxime, suscipit dolorem harum qui fugit consectetur at quibusdam dolor?</div>
+                                        <div class="text-center" style="min-height: 100px;">
+                                            <h5 class="d-inline">Taklif:</h5> 
+                                            name
+                                        </div>
                                         <p class="card-text px-2"><h5 class="d-inline">Nomzod:</h5> Hatamov Fazliddinni tayinlash</p>
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center w-100 my-auto">
@@ -192,6 +195,7 @@
 
 
     <!-- JavaScript files-->
+    <script src="{% static '/js/time.js' %}" ></script>
     <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static '/vendor/just-validate/js/just-validate.min.js' %}"></script>
     <script src="{% static '/vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
