@@ -1,1 +1,183 @@
-/* your styles go here */
+.style-w-logo {
+    width: 30px;
+    height: auto;
+}
+.style-loge-text {
+    font-weight: 600;
+}
+.style-main {
+    width: 100%;
+    height: calc(100vh - 72px);
+}
+.costom-btn-border-radius {
+    border-radius: 5px;
+}
+.costom-btn-respanse {
+    font-size: small;
+    padding: 6px 12px;
+}
+.style-response-img {
+    width: auto;
+    height: 100%;
+}
+.style-footer-icon {
+    width: 30px;
+    height: auto;
+}
+.style-white-scope {
+    white-space: nowrap;
+}
+.style-heder-w {
+    width: 100%;
+    height: 66px;
+}
+.ftco-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    margin: 0 auto;
+    max-width: 310px;
+    border: 1px solid #888;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px 6px #eee;
+}
+
+.logo-img {
+    width: 60px;
+}
+
+.error-feedback {
+    color: red;
+    font-size: 14px;
+}
+
+.btn-wrapper {
+    margin-bottom: 20px;
+}
+.kengash {
+    font-size: 17px;
+}
+
+/* Nodir aka */
+
+.remainingTime {
+    font-size: 24px;
+    margin: 0;
+}
+.card-body {
+    display: block !important;
+    padding: 0;
+}
+.taklif {
+    padding: 10px !important;
+}
+/* Orifxonaka */
+.agree {
+    background-color: #479f76;
+}
+.against {
+    background-color: #e35d6a;
+}
+.indifferent {
+    background-color: #f8bc07;
+}
+.didnt-come {
+    background-color: #087990;
+}
+/* Response */
+@media screen and (min-width: 576px) {
+    .costom-btn-respanse {
+        font-size: medium;
+        padding: 6px 20px;
+    }
+    .style-response-img {
+        width: 100%;
+        height: auto;
+    }
+    .style-main {
+        width: 100%;
+        height: 380px;
+    }
+    .login-container {
+        max-width: 430px;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 15px 10px 6px #eee;
+    }
+
+    .logo-wrapper {
+        margin-bottom: 20px !important;
+    }
+    .login-input {
+        width: 350px;
+    }
+
+    .logo-img {
+        width: 80px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .style-w-logo {
+        width: 40px;
+        height: auto;
+    }
+    .style-main {
+        width: 100%;
+        height: 510px;
+    }
+    .style-heder-w {
+        width: 100%;
+        height: 97px;
+    }
+    /* Nodir aka */
+    .card-body {
+        padding: 20px;
+    }
+}
+@media screen and (min-width: 992px) {
+    .style-loge-text {
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .costom-btn-respanse {
+        font-size: medium;
+        padding: 8px 25px;
+    }
+    .style-main {
+        width: 100%;
+        height: 660px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .style-loge-text {
+        font-size: 21px;
+        font-weight: 600;
+    }
+    .costom-btn-respanse {
+        font-size: medium;
+        padding: 8px 30px;
+    }
+    .style-main {
+        width: 100%;
+        height: 800px;
+    }
+}
+@media screen and (min-width: 1400px) {
+    .style-loge-text {
+        font-size: 22px;
+        font-weight: 600;
+    }
+    .costom-btn-respanse {
+        font-size: medium;
+        padding: 10px 40px;
+    }
+    .style-main {
+        width: 100%;
+        height: 930px;
+    }
+}
