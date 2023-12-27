@@ -335,15 +335,21 @@ def taklif_azo(request):
 def taklif_azo_baxolash(request, pk):
     try:
         data = Taklif.objects.filter(id=pk)
-        for d in data:            
+        for d in data:
+            name = d.name
+            nomzod = d.nomzod            
             vaqt=d.vaqt
         d = pk
     except:
         d=1
         vaqt = 10000
+        name = ""
+        nomzod = ""
     context = {
         "d":d,
-        "vaqt":vaqt
+        "vaqt":vaqt,
+        "name":name,
+        "nomzod":nomzod,
     }
     return render(request, 'ovoz/taklif_azo_baxolash.html', context)
 
