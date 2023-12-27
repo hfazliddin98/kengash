@@ -37,7 +37,7 @@
       <div class="sidebar-header d-flex align-items-center justify-content-center p-3 mb-3">
         <!-- User Info-->
         <div class="sidenav-header-inner text-center"><img class="img-fluid rounded-circle avatar mb-3"
-            src="{% static '/img/user.png' %}" alt="person">
+            src="{% static 'img/icon-user.png' %}" alt="person">
           <h2 class="h5 text-white text-uppercase mb-0">{{user.username}}</h2>
           <p class="text-sm mb-0 text-muted">admin</p>
         </div>
@@ -86,7 +86,7 @@
         </li>
 
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{% url 'statistika' %}">
+          <a class="sidebar-link bg-success" href="{% url 'statistika' %}">
             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
               <use xlink:href="#sales-up-1"> </use>
             </svg>
@@ -99,35 +99,31 @@
   </nav>
   <div class="page">
     <!-- navbar-->
-    <header class="header mb-5 pb-3">
-      <nav class="nav navbar fixed-top">
-        <div class="container-fluid">
-          <div class="d-flex align-items-center justify-content-between w-100">
-
-            <div class="d-flex align-items-center">
-              <a class="menu-btn d-flex align-items-center justify-content-center p-2 bg-gray-900" id="toggle-btn"
-                href="#">
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-white">
-                  <use xlink:href="#menu-1"> </use>
-                </svg></a><a class="navbar-brand ms-2" href="{% url 'home' %}">
-                <div class="brand-text d-none d-md-inline-block text-uppercase letter-spacing-0">
-                  <strong class="text-primary text-sm">QDPI kengashi</strong>
-                </div>
+    <header class="style-heder-w header pb-3">
+      <nav class="nav navbar fixed-top bg-white px-4">
+          <div class="w-100 d-flex align-items-center">
+              <a class="menu-btn d-flex align-items-center justify-content-center p-2" id="toggle-btn" href="#">
+              <img width="25px" src="{% static '/img/icon-menu.png' %}" alt="">
               </a>
-            </div>
-
-            <ul class="nav-menu mb-0 list-unstyled d-flex flex-md-row align-items-md-center">
-              <!-- Log out-->
-              <li class="nav-item"><a class="nav-link text-white text-sm ps-0" href="{% url 'logout' %}"> <span
-                    class="d-none d-sm-inline-block">Chiqish</span>
-                  <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                    <use xlink:href="#security-1"> </use>
-                  </svg></a></li>
-            </ul>
+              <ul class="w-100 nav-menu mb-0 list-unstyled d-flex justify-content-between flex-md-row align-items-center">
+              <!-- Notifications dropdown-->
+              <li class="ms-4">
+                  <div class="px-md-1 px-lg-3 d-none d-md-inline-block">
+                  <a class="navbar-brand d-flex align-items-center gap-3 style-loge-text"href="./index.html">                  
+                  <img class="style-w-logo mb-2" src="{% static '/img/logo_kspi.png' %}" alt="Logo" />
+                  QDPI Kengash
+                  </a>
+                  </div>
+              </li>
+              <li>
+                  <a href="{% url 'logout' %}" type="a" class="btn btn-success costom-btn-border-radius costom-btn-respanse">
+                  CHIQISH
+                  </a>
+              </li>
+              </ul>
           </div>
-        </div>
       </nav>
-    </header>
+  </header>
     <!-- Breadcrumb-->
     <div class="bg-gray-200 text-sm">
       <div class="container-fluid">
@@ -140,40 +136,54 @@
       </div>
     </div>
     <!-- Page Header-->
-    <header class="py-4">
-      <div class="container-fluid py-2">
-        <h1 class="h2 mb-0 text-center"> Barcha takliflar statistikasi</h1>
+    <header class="container py-4 px-2 px-sm-5">
+      <div class="d-flex justify-content-between align-items-center">
+          <h1>Barcha takliflar statistikasi</h1>
+          <a class="btn btn-success" href="{% url 'stistika_yangilanishi' %}">Yangilash</a>
       </div>
-      <span>
-        <a href="{% url 'stistika_yangilanishi' %}">Yangilash</a>
-      </span>
     </header>
+
     <section>
       <div class="container-fluid">
         <div class="row">         
           {% for d in data %}
-          <div class="col-lg-6">
-            <div class="card">
-              
-              <div class="card-header border-bottom">
-                <h4>{{d.taklif_id}}</h4>
-              </div>
-              <div class="card-body">
-
-                <img class="w-100" src="{% url 'diyogramma' d.pk %}" alt="Pie Chart">
-                <p>Rozilar {{d.rozilar}}</p>
-                <p>Qarshilar {{d.qarshilar}}</p>
-                <p>Befarqlar {{d.betaraflar }}</p>
-                <p>Qatnamshmaganlar {{d.rozilar}}</p>
-                                
-              </div>
+          <div class="shadow rounded-3 col-12 col-md pb-2">
+            <div>
+                <h4 class="text-black-50 mt-3 fs-6 fs-5 fs-4 fs-3">
+                    <b>Taklif nomi: </b>{{d.name}}
+                </h4>
             </div>
-
-          </div>
+            <div>
+                <img class="img-fluid" src="{% url 'diyogramma' d.pk %}" alt="statistika" />
+            </div>
+            <div class="row px-3 gap-2">
+                <div class="col-12 px-0">
+                    <div class="agree rounded-3">
+                        <a href="#" class="btn btn-sm fw-bold text-white">Rozilar {{d.rozilar}}%</a>
+                    </div>
+                </div>
+                <div class="col-12 px-0">
+                    <div class="against rounded-3">
+                        <a href="#" class="btn btn-sm fw-bold text-white">Qarshilar {{d.qarshilar}}%</a>
+                    </div>
+                </div>
+                <div class="col-12 px-0">
+                    <div class="indifferent rounded-3">
+                        <a href="#" class="btn btn-sm fw-bold text-white">Betaraflar {{d.betaraflar}}%</a>
+                    </div>
+                </div>
+                <div class="col-12 px-0">
+                    <div class="didnt-come rounded-3">
+                        <a href="#" class="btn btn-sm fw-bold text-white">Qatnashmaganlar {{d.qatnashmaganlar}}%</a>
+                    </div>
+                </div>
+            </div>
+        </div>
           {% endfor %}
         </div>
       </div>
     </section>
+    
 
     <footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2" style="background: #222">
       <div class="container-fluid">

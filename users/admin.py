@@ -10,4 +10,4 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Davomat)
 class DavomatAdmin(admin.ModelAdmin):
-    list_display = ['id']
+    list_display = ['id', 'aktiv']

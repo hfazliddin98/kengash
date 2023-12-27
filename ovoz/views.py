@@ -14,7 +14,8 @@ from users.models import User, Davomat
 from users.forms import LoginForm
 from .forms import TaklifForm, DavomatForm
 from .models import Taklif, Statistika, Baxo
-from users.views import qatnashmagan_son
+from users.views import home_azolar_soni, home_takliflar_soni, home_aktiv_takliflar_soni, home_baholangan_takliflar_soni
+from users.views import statistika_qatnashmaganlar_soni, statistika_qarshilar_soni, statistika_rozilar_soni, statistika_betaraflar_soni
 
 
 
@@ -22,10 +23,10 @@ from users.views import qatnashmagan_son
 def diyogramma(request, pk):
     data = Statistika.objects.filter(id=pk)
     for d in data:
-        rozilar = int(d.rozilar)
-        qarshilar = int(d.qarshilar) 
-        betaraflar = int(d.betaraflar) 
-        qatnashmaganlar = int(d.qatnashmaganlar) 
+        rozilar = statistika_rozilar_soni()
+        qarshilar = statistika_qarshilar_soni()
+        betaraflar = statistika_betaraflar_soni() 
+        qatnashmaganlar = statistika_qatnashmaganlar_soni() 
     
         labels = ['rozilar', 'qarshilar', 'betaraflar', 'qatnashmaganlar']
         sizes = [rozilar, qarshilar, betaraflar, qatnashmaganlar]
@@ -62,24 +63,16 @@ def kirish(request):
 @csrf_exempt  
 def home(request):
     try:
-            azolar = User.objects.filter(lavozim='azo')
-            azo_soni = azolar.__len__
-            elonlar = Taklif.objects.all()
-            if elonlar:
-                elonlar_soni = elonlar.__len__
-            else:
-                elonlar_soni = "0"
-            aktivlar = Taklif.objects.filter(yoqish=False)
-            aktivlar_soni = aktivlar.__len__
-            baholangan = Taklif.objects.filter(yoqish=True)
-            baholangan_soni = baholangan.__len__         
-            
+        azo_soni = home_azolar_soni()        
+        elonlar_soni = home_takliflar_soni()
+        aktivlar_soni = home_aktiv_takliflar_soni()
+        baholangan_soni = home_baholangan_takliflar_soni()              
            
     except:
-            azo_soni = '0'
-            elonlar_soni = '0'
-            aktivlar_soni = '0'
-            baholangan_soni = '0'
+        azo_soni = '0'
+        elonlar_soni = '0'
+        aktivlar_soni = '0'
+        baholangan_soni = '0'
 
 
     context = {
@@ -115,42 +108,42 @@ def azo_qoshish(request):
                 user.is_active = False
                 user.is_staff = False
                 
-                return redirect('/azo/')
+                return redirect('/azolar/')
         return render(request, 'users/azo_qoshish.html')
     except:
         return HttpResponse('Azo qo`shilmadi')
 
-@csrf_exempt
-def rozilar_soni(pk):
-    baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="roziman").all()    
-    son = 0
-    for b in baxo:
-        son += 1
-    return son
+# @csrf_exempt
+# def rozilar_soni(pk):
+#     baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="roziman").all()    
+#     son = 0
+#     for b in baxo:
+#         son += 1
+#     return son
 
-@csrf_exempt
-def qarshilar_soni(pk):
-    baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="qarshiman").all()    
-    son = 0
-    for b in baxo:
-        son += 1
-    return son
+# @csrf_exempt
+# def qarshilar_soni(pk):
+#     baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="qarshiman").all()    
+#     son = 0
+#     for b in baxo:
+#         son += 1
+#     return son
 
-@csrf_exempt
-def betaraflar_soni(pk):
-    baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="betarafman").all()    
-    son = 0
-    for b in baxo:
-        son += 1
-    return son
+# @csrf_exempt
+# def betaraflar_soni(pk):
+#     baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="betarafman").all()    
+#     son = 0
+#     for b in baxo:
+#         son += 1
+#     return son
 
-@csrf_exempt
-def qatnashmaganlar_soni(pk):
-    baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="roziman").all()    
-    son = 0
-    for b in baxo:
-        son += 1
-    return son
+# @csrf_exempt
+# def qatnashmaganlar_soni(pk):
+#     baxo = Baxo.objects.filter(taklif_id=pk).filter(baxo="roziman").all()    
+#     son = 0
+#     for b in baxo:
+#         son += 1
+#     return son
 
 @csrf_exempt
 def stistika_yangilanishi(request):
@@ -161,32 +154,24 @@ def stistika_yangilanishi(request):
                 statistika = Statistika.objects.filter(taklif_id=t.id)
                 if statistika:                    
                     data = Statistika.objects.filter(taklif_id=t.id).update(
-                            rozilar = "2",
-                            qarshilar = "2",
-                            betaraflar = "2",
-                            qatnashmaganlar = "2",                            
-                        ) 
-                    print("ALL Update")
-                    
+                        rozilar = statistika_rozilar_soni(),
+                        qarshilar = statistika_qarshilar_soni(),
+                        betaraflar = statistika_betaraflar_soni(),
+                        qatnashmaganlar = statistika_qatnashmaganlar_soni(),                            
+                    )                   
                     
                 else:
-                        data = Statistika.objects.create(
-                            taklif_id = t.id,
-                            name = t.name,
-                            nomzod = t.nomzod,
-                            rozilar = "2",
-                            qarshilar = "2",
-                            betaraflar = "2",
-                            qatnashmaganlar = "2",                        
-                        )
-                        data.save()  
-                        print("ALL Create")
-                        
-            xabar = "Hozirda malumot yangilanyapti"
-            context = {
-                "xabar":xabar,
-            }
-            # return render(request, 'xato/malumot.html', context) 
+                    data = Statistika.objects.create(
+                        taklif_id = t.id,
+                        name = t.name,
+                        nomzod = t.nomzod,
+                        rozilar = statistika_rozilar_soni(),
+                        qarshilar = statistika_qarshilar_soni(),
+                        betaraflar = statistika_betaraflar_soni(),
+                        qatnashmaganlar = statistika_qatnashmaganlar_soni(),                        
+                    )
+                    data.save()                          
+            
             return redirect('/statistika/')
                 
         else:
@@ -196,8 +181,7 @@ def stistika_yangilanishi(request):
             }
             return render(request, 'xato/malumot.html', context)
 
-    except:
-       
+    except:       
         return render(request, 'xato/404.html')
                 
 
@@ -207,29 +191,6 @@ def stistika_yangilanishi(request):
 def statistika(request):
     try:
         data = Statistika.objects.all()        
-        # taklif = Taklif.objects.filter(tugash=True)
-        # if taklif:
-        #     for t in taklif:
-        #         data = Statistika.objects.filter(taklif_id=t.id)
-        #         if data:
-        #             data = Statistika.objects.filter(taklif_id=t.id).update(
-        #                 rozilar = "1",
-        #                 qarshilar = "1",
-        #                 betaraflar = "1",
-        #                 qatnashmaganlar = "1",
-        #             ) 
-        #         else:
-        #             data = Statistika.objects.create(
-        #                 taklif_id = t.id,
-        #                 name = t.name,
-        #                 nomzod = t.nomzod,
-        #             )
-        #             data.save()
-
-        #     return redirect("/statistika/")
-            
-        # else:
-        #     return HttpResponse("Takliflar hali baxolanish jarayonida..")
                 
     except:
         data = ''    
@@ -299,8 +260,7 @@ def taklif_yoqish(request, pk):
         data.boshlanish_vaqti = boshlanish_vaqti
         data.tugash_vaqti = tugash_vaqti
         data.yoqish = True        
-        data.save()
-         
+        data.save()        
 
         return redirect('/taklif/')
         
@@ -331,37 +291,36 @@ def xal_qilish(request, pk):
         taklif = Taklif.objects.filter(id=pk).filter(yoqish=True)
         if taklif:
             statistika = Statistika.objects.filter(taklif_id=pk)
-            if statistika:             
-                  
-                    data = Statistika.objects.filter(taklif_id=pk).update(
-                        rozilar = "2",
-                        qarshilar = "2",
-                        betaraflar = "2",
-                        qatnashmaganlar = f"{qatnashmagan_son()}",
-                        xal = True,
-                    ) 
-                    xabar = "Bu taklif xal bo`ldi"
-                    context = {
-                        'xabar':xabar,
-                    }
-                    return render(request, 'xato/malumot.html', context)
+            if statistika:                 
+                data = Statistika.objects.filter(taklif_id=pk).update(
+                    rozilar = statistika_rozilar_soni(),
+                    qarshilar = statistika_qarshilar_soni(),
+                    betaraflar = statistika_betaraflar_soni(),
+                    qatnashmaganlar = statistika_qatnashmaganlar_soni(),
+                    xal = True,
+                ) 
+                xabar = "Bu taklif xal bo`ldi"
+                context = {
+                    'xabar':xabar,
+                }
+                return render(request, 'xato/malumot.html', context)
             else:
-                    data = Statistika.objects.create(
-                        taklif_id = pk,
-                        name = "ali",
-                        nomzod = "Ali",
-                        rozilar = "1",
-                        qarshilar = "1",
-                        betaraflar = "1",
-                        qatnashmaganlar = f"{qatnashmagan_son()}",
-                        xal = True,
-                    )
-                    data.save()
-                    xabar = "Bu taklif xal bo`ldi"
-                    context = {
-                        'xabar':xabar,
-                    }
-                    return render(request, 'xato/malumot.html', context)
+                data = Statistika.objects.create(
+                    taklif_id = pk,
+                    name = "ali",
+                    nomzod = "Ali",
+                    rozilar = statistika_rozilar_soni(),
+                    qarshilar = statistika_qarshilar_soni(),
+                    betaraflar = statistika_betaraflar_soni(),
+                    qatnashmaganlar = statistika_qatnashmaganlar_soni(),
+                    xal = True,
+                )
+                data.save()
+                xabar = "Bu taklif xal bo`ldi"
+                context = {
+                    'xabar':xabar,
+                }
+                return render(request, 'xato/malumot.html', context)
             
         else:
             xabar = "Bu taklif xali yoqilmagan..."

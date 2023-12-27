@@ -1,20 +1,191 @@
-<h1>Ro`yhatdan o`tish</h1>
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="QDPI Kengashi" />
+    <meta name="author" content="Meliboev Azimjon, Hatamov Fazliddin">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="all,follow" />
+    <title>Kirish</title>
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static '/img/logo_kspi.png' %}" />
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <!-- Choices CSS-->
+    <link rel="stylesheet" href="{% static '/vendor/choices.js/public/assets/styles/choices.min.css' %}" />
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="{% static '/vendor/overlayscrollbars/css/OverlayScrollbars.min.css' %}" />
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static '/css/style.default.css' %}" id="theme-stylesheet" />
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static '/css/custom.css' %}" />
+  </head>
+    <body>
+        <!-- Side Navbar -->
+        <nav class="side-navbar">
+            <div class="side-navbar-inner">
+                <!-- Sidebar Header    -->
+                <div class="sidebar-header d-flex align-items-center justify-content-center p-3 mb-3">
+                    <!-- User Info-->
+                    <div class="sidenav-header-inner text-center">
+                        <img class="img-fluid rounded-circle avatar mb-3"
+                src="{% static '/img/icon-user.png' %}" alt="person">
+                        <!-- Ismi -->
+                        <h2 class="h5 text-white text-uppercase mb-0">Nathan Andrews</h2>
+                    </div>
+                    <!-- Small Brand information, appears on minimized sidebar--><a class="brand-small text-center" href="index.html">
+                        <p class="h1 m-0">QDPI</p></a>
+                    </div>
+                    <!-- Sidebar Navigation Menus--><span class="text-uppercase text-gray-500 text-sm fw-bold letter-spacing-0 mx-lg-2 heading">Asosiy</span>
+                    <ul class="list-unstyled">                  
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="home.html"> 
+                                <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                                    <use xlink:href="#real-estate-1"> </use>
+                                </svg>
+                                Asosiy
+                            </a>
+                        </li>
+                        <li class="sidebar-item"><a class="sidebar-link bg-success" href="./azolar.html"> 
+                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                                <use xlink:href="#survey-1"> </use>
+                            </svg>A'zolar</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="./davomat.html"> 
+                                <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                                    <use xlink:href="#sales-up-1"> </use>
+                                </svg>Davomat</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="./takliflar.html"> 
+                                    <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                                        <use xlink:href="#portfolio-grid-1"> </use>
+                                    </svg>Takliflar </a></li>
+                                    <li class="sidebar-item"><a class="sidebar-link" href="./statistika.html"> 
+                                        <svg class="svg-icon svg-icon-sm svg-icon-heavy me-2">
+                                            <use xlink:href="#disable-1"> </use>
+                                        </svg>Statistika</a></li>
+                                    </div>
+                                </nav>
+                            <div class="page">
+                                <!-- navbar-->
+                                <!-- navbar-->
+                                <header class="style-heder-w header pb-3">
+                                    <nav class="nav navbar fixed-top bg-white px-4">
+                                        <div class="d-flex align-items-center w-100">
+                                            <div class="w-100 d-flex align-items-center">
+                                                <a class="menu-btn d-flex align-items-center justify-content-center p-2" id="toggle-btn"
+                                                href="#">
+                                                <img width="25px" src="{% static '/img/icon-menu.png' %}" alt="">
+                                                </a>
+                                                <ul class="w-100 nav-menu mb-0 list-unstyled d-flex justify-content-between flex-md-row align-items-center">
+                                                    <!-- Notifications dropdown-->
+                                                    <li class="ms-4">
+                                                        <div class="px-md-1 px-lg-3 d-none d-md-inline-block">
+                                                            <a
+                                                            class="navbar-brand d-flex align-items-center gap-3 style-loge-text"
+                                                            href="{% url 'home' %}"
+                                                            >
+                                                            <img class="style-w-logo mb-2" src="{% static '/img/logo_kspi.png' %}"
+                                                            alt="Logo"
+                                                            />
+                                                            QDPI Kengash
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                    href="{% url 'home' %}"
+                                                    type="a"
+                                                    class="btn btn-success costom-btn-border-radius costom-btn-respanse"
+                                                    >
+                                                    CHIQISH
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </header>
+                            <!-- Breadcrumb-->
+                            <div class="bg-gray-200 text-sm">
+                                <div class="container-fluid">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb mb-0 py-3">
+                                            <li class="breadcrumb-item"><a class="fw-light" href="./home.html">Asosiy</a></li>
+                                            <li class="breadcrumb-item"><a class="fw-light" href="./azolar.html">A'zolar</a></li>
+                                            <li class="breadcrumb-item active fw-light" aria-current="page">A'zo qo'shish</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                            <!-- Page Header-->
+                            <header class="py-4">
+                                <div class="container-fluid py-2">
+                                    <h1 class="h2 fw-normal mb-0 text-center">A'zolar qo'shish</h1>
+                                </div>
+                            </header>
 
+<section>
+    <div class="container-fluid">
+        <form class="d-flex flex-column gap-3" method="post">
+            {% csrf_token %}
+            <label class="d-flex flex-column " for="nomi">
+                Foydalanuvchi nomi
+                <input class="form-control" id="nomi" type="text" name="username" >
+            </label>
+            <label class="d-flex flex-column " for="familya">
+                Familya
+                <input class="form-control" id="familya" type="text" name="last_name" >
+            </label>
+            <label class="d-flex flex-column " for="ism">
+                Ismi
+                <input class="form-control" id="ism" type="text" name="first_name" >
+            </label>
+            <select class="form-select w-100" name="lavozim">
+                <option value="" selected disabled>Huquqi</option>
+                <option value="admin">Admin</option>
+                <option value="azo">A'zo</option>
+            </select>
+            <label class="d-flex flex-column " for="parol">
+                Parol
+                <input class="form-control" id="parol" type="password" name="password1" placeholder="Parol">
+            </label>
+            <label class="d-flex flex-column " for="parolTasdiq">
+                Parolni tasdiqlash
+                <input class="form-control" id="parolTasdiq" type="password" name="password2" placeholder="Parolni tasdiqlang">
+            </label>
+            <button type="submit" class="btn btn-success mb-5">
+                SAQLASH
+            </button>
+        </form>
+    </div>
+</section>
 
-<hr>
-
-<form method="post">
-    {% csrf_token %}
-
-    <input type="text" name="username" placeholder="username">
-    <input type="text" name="last_name" placeholder="last_name">
-    <input type="text" name="first_name" placeholder="first_name">
-    <select name="lavozim">
-        <option value="admin">Admin</option>
-        <option value="azo">Azo</option>
-    </select>
-    <input type="text" name="password1" placeholder="parol">
-    <input type="text", name="password2", placeholder="parolni tasdiqlang">   
-
-    <button type="submit">saqlash</button>
-</form>
+<footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2" style="background: #222">
+  <div class="container-fluid">
+    <div class="row text-center gy-3">
+      <div class="col-sm-6 text-sm-start">
+        <p class="mb-0 text-sm text-gray-600">2023-2024 &copy;</p>
+      </div>
+      <div class="col-sm-6 text-sm-end">
+        <p class="mb-0 text-sm text-gray-600"><a href="{% url 'home' %}">Kengash.kspi.uz</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+<!-- JavaScript files-->
+  <!-- JavaScript files-->
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static '/vendor/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static '/vendor/just-validate/js/just-validate.min.js' %}"></script>
+  <script src="{% static '/vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+  <script src="{% static '/vendor/overlayscrollbars/js/OverlayScrollbars.min.js' %}"></script>
+  <script src="{% static '/js/charts-custom.js' %}"></script>
+  <!-- Main File-->
+  <script src="{% static '/js/front.js' %}"></script>
+<!-- Main File-->
+<script src="js/front.js"></script>
+<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</body>
+</html>
